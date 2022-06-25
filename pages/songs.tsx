@@ -1,5 +1,9 @@
+import { useState, Fragment } from 'react';
 import cn from 'classnames';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { Layout } from '@components/Layout';
+import { IconButton } from '@components/IconButton';
+import { Divider } from '@components/Divider';
 import { songs } from 'lib/songs';
 
 type SongProps = {
@@ -8,8 +12,6 @@ type SongProps = {
   lyrics: string;
   genre?: string;
 };
-
-const Divider = () => <div className="h-[1px] border-b border-stone-300"></div>;
 
 const Song = ({ artist, genre, title }: SongProps) => (
   <li className="grid grid-cols-4 items-baseline gap-2 overflow-scroll py-2.5">
@@ -30,20 +32,35 @@ const Song = ({ artist, genre, title }: SongProps) => (
   </li>
 );
 
-const Songs = () => (
-  <Layout withFooter={false}>
-    <div className="py-8">
-      <h1>Songs</h1>
-      <ul className="mt-8 h-[50vh] overflow-scroll">
-        {songs.map((song) => (
-          <>
-            <Song key={song.id} {...song} />
-            <Divider />
-          </>
-        ))}
-      </ul>
-    </div>
-  </Layout>
-);
+const Songs = () => {
+  const [showSongs, setShowSongs] = useState(true);
+
+  const toggleSongsVisible = () => setShowSongs(!showSongs);
+
+  return (
+    <Layout withFooter={false}>
+      <div className="py-8">
+        <div className="flex items-center gap-4">
+          <h1>Songs</h1>
+          <IconButton
+            title={showSongs ? 'Hide songs list' : 'Show songs list'}
+            onClick={toggleSongsVisible}
+            Icon={showSongs ? EyeOffIcon : EyeIcon}
+          />
+        </div>
+        {showSongs && (
+          <ul className="mt-8 h-[50vh] overflow-scroll">
+            {songs.map((song) => (
+              <Fragment key={song.id}>
+                <Song key={song.id} {...song} />
+                <Divider />
+              </Fragment>
+            ))}
+          </ul>
+        )}
+      </div>
+    </Layout>
+  );
+};
 
 export default Songs;
