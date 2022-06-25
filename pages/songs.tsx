@@ -1,14 +1,15 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import cn from 'classnames';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { Layout } from '@components/Layout';
 import { IconButton } from '@components/IconButton';
 import { Divider } from '@components/Divider';
-import { songs } from 'lib/songs';
+import { fetchSongs, type Song } from '@lib/songs/songs';
+import { login } from '@lib/auth/auth';
 
 type SongProps = {
-  artist: string;
   title: string;
+  artist?: string;
   lyrics: string;
   genre?: string;
 };
@@ -34,6 +35,16 @@ const Song = ({ artist, genre, title }: SongProps) => (
 
 const Songs = () => {
   const [showSongs, setShowSongs] = useState(true);
+  const [songs, setSongs] = useState<Song[]>([]);
+
+  useEffect(() => {
+    const getSongs = async () => {
+      await login();
+      setSongs(await fetchSongs());
+    };
+
+    void getSongs();
+  }, []);
 
   const toggleSongsVisible = () => setShowSongs(!showSongs);
 
