@@ -10,7 +10,7 @@ export const CardLink = ({
 }: React.PropsWithChildren<CardProps>) => (
   <a
     href={href}
-    className="m-4 max-w-[300px] rounded-lg border-2 border-stone-500 p-6 text-left text-inherit hover:border-teal-500 hover:text-teal-600"
+    className="m-4 max-w-[300px] rounded-lg border-2 border-stone-500 p-6 text-left text-inherit hover:border-red-400 hover:text-red-500"
   >
     {children}
   </a>
