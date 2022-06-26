@@ -2,8 +2,10 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   query,
   orderBy,
+  doc,
 } from 'firebase/firestore';
 import { database, auth } from '@lib/firebase/config';
 import { toTitleCase } from '@lib/string';
@@ -44,4 +46,17 @@ export const fetchSongs = async (): Promise<Song[]> => {
         id: doc.id,
       } as Song)
   );
+};
+
+export const fetchSong = async (id: string): Promise<Song> => {
+  await login();
+
+  const docRef = doc(database, 'tracks', id);
+
+  const songDoc = await getDoc(docRef);
+
+  return {
+    ...songDoc.data(),
+    id: songDoc.id,
+  } as Song;
 };
