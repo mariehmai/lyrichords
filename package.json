@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@tiptap/react": "^2.0.0-beta.113",
+    "@tiptap/starter-kit": "^2.0.0-beta.189",
     "classnames": "^2.3.1",
     "firebase": "^9.8.4",
     "next": "12.1.6",

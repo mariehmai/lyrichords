@@ -2,6 +2,7 @@ import React, { useState, type FormHTMLAttributes } from 'react';
 import cn from 'classnames';
 import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
 import { saveSong } from '@lib/songs/songs';
+import Editor from './Editor';
 
 type Genre =
   | 'Pop'
@@ -29,10 +30,10 @@ type InputFieldProps = {
 };
 
 const InputField = ({ label, value, onChange }: InputFieldProps) => (
-  <div className="flex flex-1 flex-col gap-2">
+  <div className="flex flex-1 flex-col justify-center gap-2">
     <label htmlFor={label}>{label}</label>
     <input
-      className="rounded-md p-2 outline outline-stone-500"
+      className="rounded-md p-2 outline outline-stone-500 focus:outline-2 focus:outline-red-400"
       id={label}
       value={value}
       onChange={onChange}
@@ -57,7 +58,7 @@ export const CreateSongForm = React.forwardRef<
     setLyrics('');
   };
 
-  const saveNewSong = (e: React.MouseEvent) => {
+  const submitNewSong = (e: React.MouseEvent) => {
     e.preventDefault();
 
     return saveSong({
@@ -67,8 +68,7 @@ export const CreateSongForm = React.forwardRef<
       genre: genre || 'Unknown',
     })
       .then(() => resetForm())
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setError(true);
       });
   };
@@ -94,7 +94,7 @@ export const CreateSongForm = React.forwardRef<
           <label htmlFor="genre-select">Genre</label>
           <select
             id="Genre"
-            className="rounded-md p-2 outline outline-stone-500"
+            className="rounded-md border-2 border-stone-500 p-2 py-2.5 outline-2 focus:outline-red-400"
           >
             <option value="">--Choose a genre--</option>
             {Object.keys(genres).map((genre) => (
@@ -111,22 +111,17 @@ export const CreateSongForm = React.forwardRef<
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="Lyrics">Lyrics</label>
-        <textarea
-          id="Lyric"
-          className="rounded-md p-2 outline outline-stone-500"
-          value={lyrics}
-          onChange={(e) => setLyrics(e.target.value)}
-        />
+        <Editor onUpdate={(content) => setLyrics(content)} editable />
       </div>
       <button
         className={cn(
-          'flex items-center gap-2 self-center rounded-lg bg-stone-500 py-2.5 px-4 font-bold text-white',
+          'flex items-center gap-2 self-center rounded-lg bg-stone-600 py-2.5 px-4 font-bold text-white outline-red-400',
           {
             'cursor-not-allowed bg-stone-300': !title,
           }
         )}
         disabled={!title}
-        onClick={saveNewSong}
+        onClick={submitNewSong}
       >
         Save new song
         <CheckIcon className="h-7 w-7" />
