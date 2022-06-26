@@ -35,7 +35,6 @@ const Editor = ({ content = '', editable = false, onUpdate }: EditorProps) => {
   return (
     <EditorContent
       editor={editor}
-      contentEditable={editor.isEditable}
       className={cn(
         'max-h-[90vh] min-h-[50vh] overflow-auto rounded-md bg-white focus:outline-red-400',
         {
