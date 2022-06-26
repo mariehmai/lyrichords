@@ -1,8 +1,11 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useSignIn } from '@lib/auth/auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useSignIn();
+
   return (
     <>
       <Head>

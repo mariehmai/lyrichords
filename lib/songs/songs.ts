@@ -1,16 +1,15 @@
 import {
   collection,
   addDoc,
-  getDocs,
   getDoc,
   query,
   orderBy,
   doc,
   setDoc,
 } from 'firebase/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { database, auth } from '@lib/firebase/config';
 import { toTitleCase } from '@lib/string';
-import { login } from '@lib/auth/auth';
 
 const dbInstance = collection(database, 'tracks');
 
@@ -35,24 +34,22 @@ export const saveSong = async ({ title, artist, genre, lyrics }: CreateSong) =>
     createdAt: new Date(),
   });
 
-export const fetchSongs = async (): Promise<Song[]> => {
-  await login();
-
+export const useSongs = () => {
   const q = query(dbInstance, orderBy('title', 'asc'));
-  const songDocs = await getDocs(q);
+  const [tracks, loading, error] = useCollection(q);
 
-  return songDocs.docs.map(
+  const songs = tracks?.docs.map(
     (doc) =>
       ({
         ...doc.data(),
         id: doc.id,
       } as Song)
   );
+
+  return { songs, loading, error };
 };
 
 export const fetchSong = async (id: string): Promise<Song> => {
-  await login();
-
   const docRef = doc(database, 'tracks', id);
 
   const songDoc = await getDoc(docRef);
@@ -63,8 +60,5 @@ export const fetchSong = async (id: string): Promise<Song> => {
   } as Song;
 };
 
-export const updateSong = async (id: string, body: UpdateSong) => {
-  await login();
-
-  return await setDoc(doc(database, 'tracks', id), body);
-};
+export const updateSong = async (id: string, body: UpdateSong) =>
+  setDoc(doc(database, 'tracks', id), body);

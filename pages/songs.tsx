@@ -1,11 +1,11 @@
-import React, { useState, Fragment, useEffect, useRef } from 'react';
+import React, { useState, Fragment, useRef } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { EyeIcon, EyeOffIcon, DocumentAddIcon } from '@heroicons/react/solid';
 import { Layout } from '@components/Layout';
 import { IconButton } from '@components/IconButton';
 import { Divider } from '@components/Divider';
-import { fetchSongs, type Song } from '@lib/songs/songs';
+import { useSongs } from '@lib/songs/songs';
 import { CreateSongForm } from '@components/CreateSongForm';
 
 const ClickableSong = ({
@@ -57,16 +57,8 @@ const Song = ({ id, artist, genre, title, disabled = false }: SongProps) => (
 
 const Songs = () => {
   const [showSongs, setShowSongs] = useState(true);
-  const [songs, setSongs] = useState<Song[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    const getSongs = async () => {
-      setSongs(await fetchSongs());
-    };
-
-    void getSongs();
-  }, []);
+  const { songs, loading } = useSongs();
 
   const toggleSongsVisible = () => setShowSongs(!showSongs);
 
@@ -100,12 +92,14 @@ const Songs = () => {
               genre="Genre"
             />
             <Divider size="md" />
-            {songs.map((song) => (
-              <Fragment key={song.id}>
-                <Song {...song} />
-                <Divider />
-              </Fragment>
-            ))}
+            {loading
+              ? 'Loading'
+              : songs?.map((song) => (
+                  <Fragment key={song.id}>
+                    <Song {...song} />
+                    <Divider />
+                  </Fragment>
+                ))}
           </ul>
         )}
         <CreateSongForm ref={formRef} />
