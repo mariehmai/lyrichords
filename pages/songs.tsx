@@ -1,11 +1,11 @@
-import { useState, Fragment, useEffect } from 'react';
+import { useState, Fragment, useEffect, useRef } from 'react';
 import cn from 'classnames';
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import { EyeIcon, EyeOffIcon, DocumentAddIcon } from '@heroicons/react/solid';
 import { Layout } from '@components/Layout';
 import { IconButton } from '@components/IconButton';
 import { Divider } from '@components/Divider';
 import { fetchSongs, type Song } from '@lib/songs/songs';
-import { login } from '@lib/auth/auth';
+import { CreateSongForm } from '@components/CreateSongForm';
 
 type SongProps = {
   title: string;
@@ -36,10 +36,10 @@ const Song = ({ artist, genre, title }: SongProps) => (
 const Songs = () => {
   const [showSongs, setShowSongs] = useState(true);
   const [songs, setSongs] = useState<Song[]>([]);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const getSongs = async () => {
-      await login();
       setSongs(await fetchSongs());
     };
 
@@ -48,15 +48,24 @@ const Songs = () => {
 
   const toggleSongsVisible = () => setShowSongs(!showSongs);
 
+  const addNewSong = () => {
+    formRef.current?.scrollIntoView();
+  };
+
   return (
     <Layout withFooter={false}>
-      <div className="py-8">
+      <div className="flex flex-col gap-4 py-8">
         <div className="flex items-center gap-4">
           <h1>Songs</h1>
           <IconButton
             title={showSongs ? 'Hide songs list' : 'Show songs list'}
             onClick={toggleSongsVisible}
             Icon={showSongs ? EyeOffIcon : EyeIcon}
+          />
+          <IconButton
+            title="Add new song"
+            onClick={addNewSong}
+            Icon={DocumentAddIcon}
           />
         </div>
         {showSongs && (
@@ -69,6 +78,7 @@ const Songs = () => {
             ))}
           </ul>
         )}
+        <CreateSongForm ref={formRef} />
       </div>
     </Layout>
   );

@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore';
 import { database, auth } from '@lib/firebase/config';
 import { toTitleCase } from '@lib/string';
+import { login } from '@lib/auth/auth';
 
 const dbInstance = collection(database, 'tracks');
 
@@ -18,7 +19,9 @@ export type Song = {
   lyrics: string;
 };
 
-export const saveSong = async ({ title, artist, genre, lyrics }: Song) =>
+export type CreateSong = Omit<Song, 'id'>;
+
+export const saveSong = async ({ title, artist, genre, lyrics }: CreateSong) =>
   addDoc(dbInstance, {
     userId: auth.currentUser?.uid,
     title: toTitleCase(title),
@@ -29,6 +32,8 @@ export const saveSong = async ({ title, artist, genre, lyrics }: Song) =>
   });
 
 export const fetchSongs = async (): Promise<Song[]> => {
+  await login();
+
   const q = query(dbInstance, orderBy('title', 'asc'));
   const songDocs = await getDocs(q);
 
