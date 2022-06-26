@@ -19,7 +19,8 @@ const Editor = ({ content = '', editable = false, onUpdate }: EditorProps) => {
     },
     editorProps: {
       attributes: {
-        class: 'p-2 outline-none rounded-md',
+        class:
+          'p-2 outline-none rounded-md bg-white min-h-[50vh] max-h-[90vh] overflow-auto focus:outline-2 focus:outline-red-400',
       },
     },
   });
@@ -35,12 +36,9 @@ const Editor = ({ content = '', editable = false, onUpdate }: EditorProps) => {
   return (
     <EditorContent
       editor={editor}
-      className={cn(
-        'max-h-[90vh] min-h-[50vh] overflow-auto rounded-md bg-white focus:outline-red-400',
-        {
-          'border-2 border-stone-500': editable,
-        }
-      )}
+      className={cn('rounded-lg', {
+        'border-2 border-stone-500 focus:border-none': editable,
+      })}
     />
   );
 };
