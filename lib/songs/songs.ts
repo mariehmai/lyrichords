@@ -6,6 +6,7 @@ import {
   query,
   orderBy,
   doc,
+  setDoc,
 } from 'firebase/firestore';
 import { database, auth } from '@lib/firebase/config';
 import { toTitleCase } from '@lib/string';
@@ -22,6 +23,7 @@ export type Song = {
 };
 
 export type CreateSong = Omit<Song, 'id'>;
+export type UpdateSong = Partial<Omit<Song, 'id'>>;
 
 export const saveSong = async ({ title, artist, genre, lyrics }: CreateSong) =>
   addDoc(dbInstance, {
@@ -59,4 +61,10 @@ export const fetchSong = async (id: string): Promise<Song> => {
     ...songDoc.data(),
     id: songDoc.id,
   } as Song;
+};
+
+export const updateSong = async (id: string, body: UpdateSong) => {
+  await login();
+
+  return await setDoc(doc(database, 'tracks', id), body);
 };
