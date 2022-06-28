@@ -74,7 +74,10 @@ export const CreateSongForm = React.forwardRef<
   };
 
   return (
-    <form ref={ref} className="flex flex-col gap-6 rounded-md bg-slate-50 p-4">
+    <form
+      ref={ref}
+      className="-mx-4 flex flex-col gap-6 rounded-md bg-slate-50 py-4 px-8 md:-mx-8"
+    >
       <span className="mb-2 flex items-center gap-2">
         <h2 className="font-bold">Add new song</h2>
         <MusicNoteIcon className="h-7 w-7" />
