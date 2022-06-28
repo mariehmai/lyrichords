@@ -2,7 +2,7 @@ import React, { useState, type FormHTMLAttributes } from 'react';
 import cn from 'classnames';
 import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
 import { saveSong } from '@lib/songs/songs';
-import Editor from './Editor';
+import TextEditor from './TextEditor';
 
 type Genre =
   | 'Pop'
@@ -111,7 +111,7 @@ export const CreateSongForm = React.forwardRef<
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="Lyrics">Lyrics</label>
-        <Editor onUpdate={(content) => setLyrics(content)} editable />
+        <TextEditor onUpdate={(content) => setLyrics(content)} editable />
       </div>
       <button
         className={cn(

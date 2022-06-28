@@ -1,13 +1,12 @@
 import {
   collection,
   addDoc,
-  getDoc,
   query,
   orderBy,
   doc,
   setDoc,
 } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import { database, auth } from '@lib/firebase/config';
 import { toTitleCase } from '@lib/string';
 
@@ -49,15 +48,15 @@ export const useSongs = () => {
   return { songs, loading, error };
 };
 
-export const fetchSong = async (id: string): Promise<Song> => {
-  const docRef = doc(database, 'tracks', id);
+export const useSong = (songId: Song['id'] = 'song-id') => {
+  const [track, loading, error] = useDocument(doc(dbInstance, songId));
 
-  const songDoc = await getDoc(docRef);
-
-  return {
-    ...songDoc.data(),
-    id: songDoc.id,
+  const song = {
+    ...track?.data(),
+    id: track?.id,
   } as Song;
+
+  return { song, loading, error };
 };
 
 export const updateSong = async (id: string, body: UpdateSong) =>

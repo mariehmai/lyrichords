@@ -1,4 +1,4 @@
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import cn from 'classnames';
 import { useEffect } from 'react';
@@ -7,15 +7,21 @@ type EditorProps = {
   editable?: boolean;
   content?: string;
   onUpdate: (content: string) => void;
+  Header?: ({ editor }: { editor: Editor }) => JSX.Element;
 };
 
-const Editor = ({ content = '', editable = false, onUpdate }: EditorProps) => {
+const TextEditor = ({
+  content = '',
+  editable = false,
+  onUpdate,
+  Header,
+}: EditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: content ? JSON.parse(content) : '',
     editable,
     onUpdate: ({ editor }) => {
-      void onUpdate(JSON.stringify(editor.getJSON()));
+      onUpdate(JSON.stringify(editor.getJSON()));
     },
     editorProps: {
       attributes: {
@@ -34,13 +40,16 @@ const Editor = ({ content = '', editable = false, onUpdate }: EditorProps) => {
   if (!editor) return null;
 
   return (
-    <EditorContent
-      editor={editor}
-      className={cn('rounded-lg', {
-        'border-2 border-stone-500 focus:border-none': editable,
-      })}
-    />
+    <>
+      {!!Header && <Header editor={editor} />}
+      <EditorContent
+        editor={editor}
+        className={cn('rounded-lg', {
+          'border-2 border-stone-500 focus:border-none': editable,
+        })}
+      />
+    </>
   );
 };
 
-export default Editor;
+export default TextEditor;
