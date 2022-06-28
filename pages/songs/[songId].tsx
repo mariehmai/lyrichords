@@ -89,10 +89,12 @@ const Song = () => {
   };
 
   const submitEditedSong = async () => {
-    await updateSong(song!.id, {
-      ...song,
-      lyrics: lyrics || song?.lyrics,
-    });
+    if (lyrics !== song.lyrics) {
+      await updateSong(song!.id, {
+        ...song,
+        lyrics: lyrics || song?.lyrics,
+      });
+    }
 
     toggleEditable(false);
   };
