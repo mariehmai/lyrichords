@@ -111,21 +111,30 @@ export const CreateSongForm = React.forwardRef<
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="Lyrics">Lyrics</label>
-        <TextEditor onUpdate={(content) => setLyrics(content)} editable />
+        <TextEditor
+          onUpdate={(content) => setLyrics(content)}
+          editable
+          Footer={({ editor }) => (
+            <button
+              className={cn(
+                'flex items-center gap-2 self-center rounded-lg bg-stone-600 py-2.5 px-4 font-bold text-white outline-red-400',
+                {
+                  'cursor-not-allowed bg-stone-300': !title,
+                }
+              )}
+              disabled={!title}
+              onClick={async (e) => {
+                await submitNewSong(e);
+                editor.commands.clearContent();
+              }}
+            >
+              Save new song
+              <CheckIcon className="h-7 w-7" />
+            </button>
+          )}
+        />
       </div>
-      <button
-        className={cn(
-          'flex items-center gap-2 self-center rounded-lg bg-stone-600 py-2.5 px-4 font-bold text-white outline-red-400',
-          {
-            'cursor-not-allowed bg-stone-300': !title,
-          }
-        )}
-        disabled={!title}
-        onClick={submitNewSong}
-      >
-        Save new song
-        <CheckIcon className="h-7 w-7" />
-      </button>
+
       {!!error && (
         <span className="text-red-800">
           An error occurred, please try later!

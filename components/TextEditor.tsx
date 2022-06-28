@@ -3,11 +3,14 @@ import StarterKit from '@tiptap/starter-kit';
 import cn from 'classnames';
 import { useEffect } from 'react';
 
+type ElementWithEditor = ({ editor }: { editor: Editor }) => JSX.Element;
+
 type EditorProps = {
   editable?: boolean;
   content?: string;
   onUpdate: (content: string) => void;
-  Header?: ({ editor }: { editor: Editor }) => JSX.Element;
+  Header?: ElementWithEditor;
+  Footer?: ElementWithEditor;
 };
 
 const TextEditor = ({
@@ -15,6 +18,7 @@ const TextEditor = ({
   editable = false,
   onUpdate,
   Header,
+  Footer,
 }: EditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
@@ -48,6 +52,7 @@ const TextEditor = ({
           'border-2 border-stone-500 focus:border-none': editable,
         })}
       />
+      {!!Footer && <Footer editor={editor} />}
     </>
   );
 };
