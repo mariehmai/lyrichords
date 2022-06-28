@@ -12,6 +12,7 @@ import { updateSong, useSong, type Song } from '@lib/songs/songs';
 import { Layout } from '@components/Layout';
 import { IconButton } from '@components/IconButton';
 import TextEditor from '@components/TextEditor';
+import { SongLyricsPlaceholder } from '@components/SongLyricsPlaceholder';
 
 type SongEditorProps = {
   editor: Editor;
@@ -36,7 +37,7 @@ const SongHeader = ({
   return (
     <div>
       <span className="flex items-center gap-2">
-        <h1 className="col-span-2 font-bold text-stone-700">{song?.title}</h1>
+        <h1 className="font-bold text-stone-700">{song?.title}</h1>
         {editable ? (
           <>
             <IconButton
@@ -61,7 +62,7 @@ const SongHeader = ({
           />
         )}
       </span>
-      <h2 className="col-span-1 text-sm text-stone-700">{song?.artist}</h2>
+      <h2 className="text-sm text-stone-700">{song?.artist}</h2>
       <div
         className={cn(
           'mt-2 w-fit rounded-full bg-red-400 px-2 py-0.5 text-sm font-bold text-white',
@@ -81,7 +82,7 @@ const Song = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const router = useRouter();
   const songId = router.query.songId as string;
-  const { song } = useSong(songId);
+  const { song, loading } = useSong(songId);
 
   const toggleEditable = (editable: boolean) => {
     setEditable(editable);
@@ -104,6 +105,7 @@ const Song = () => {
           onClick={router.back}
           Icon={ArrowSmLeftIcon}
         />
+        {loading && <SongLyricsPlaceholder />}
         {!!song.lyrics && (
           <TextEditor
             editable={editable}
