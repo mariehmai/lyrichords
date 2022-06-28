@@ -13,7 +13,7 @@ export const Layout = ({
   <div className="flex h-full flex-col justify-between px-8">
     <div className="flex grow flex-col">
       <Navbar />
-      {children}
+      <div className="h-full pt-[60px]">{children}</div>
     </div>
     {withFooter && <Footer />}
   </div>
