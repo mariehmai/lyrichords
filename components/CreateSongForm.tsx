@@ -94,7 +94,7 @@ export const CreateSongForm = React.forwardRef<
           <label htmlFor="genre-select">Genre</label>
           <select
             id="Genre"
-            className="rounded-md border-2 border-stone-500 p-2 py-2.5 outline-2 focus:outline-red-400"
+            className="appearance-none rounded-md border-2 border-stone-500 p-2 py-2.5 outline-2 focus:outline-red-400"
           >
             <option value="">--Choose a genre--</option>
             {Object.keys(genres).map((genre) => (
