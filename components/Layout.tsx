@@ -20,7 +20,7 @@ export const Layout = ({
 );
 
 export const MainContainer = ({ children }: React.PropsWithChildren<{}>) => (
-  <div className="flex flex-1 flex-col items-center justify-center py-16">
+  <div className="flex h-full flex-col items-center justify-center py-16">
     {children}
   </div>
 );
