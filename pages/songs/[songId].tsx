@@ -17,7 +17,7 @@ import { SongLyricsPlaceholder } from '@components/SongLyricsPlaceholder';
 
 type SongEditorProps = {
   goBack: () => void;
-  editor: Editor;
+  editor?: Editor;
   editable: boolean;
   song: Song;
   submitEditedSong: () => void;
@@ -32,8 +32,10 @@ const SongHeader = ({
   submitEditedSong,
   toggleEditable,
 }: SongEditorProps) => {
+  const [showDelete, setShowDelete] = useState(false);
+
   const cancelChanges = () => {
-    editor.commands.setContent(JSON.parse(song.lyrics));
+    editor?.commands.setContent(JSON.parse(song.lyrics));
     toggleEditable(false);
   };
 
@@ -45,6 +47,26 @@ const SongHeader = ({
 
   return (
     <div>
+      {showDelete && (
+        <dialog className="rounded-lg shadow-md" open={showDelete}>
+          <h1>Are you sure you want to delete the song?</h1>
+          <h4 className="text-stone-500">This operation is irreversible.</h4>
+          <div className="flew-row mt-2 flex justify-end space-x-2">
+            <button
+              className="rounded bg-stone-200 px-3 py-1 text-sm"
+              onClick={() => setShowDelete(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="rounded bg-red-200 px-3 py-1 text-sm"
+              onClick={removeSong}
+            >
+              Confirm
+            </button>
+          </div>
+        </dialog>
+      )}
       <span className="flex items-center gap-2">
         <h1 className="font-bold text-stone-700">{song?.title}</h1>
         {editable ? (
@@ -73,7 +95,7 @@ const SongHeader = ({
             <IconButton
               title="Delete song"
               size="md"
-              onClick={removeSong}
+              onClick={() => setShowDelete(!showDelete)}
               Icon={TrashIcon}
             />
           </>
@@ -131,6 +153,15 @@ const Song = () => {
           Icon={ArrowSmLeftIcon}
         />
         {loading && <SongLyricsPlaceholder />}
+        {!song.lyrics && (
+          <SongHeader
+            goBack={router.back}
+            editable={editable}
+            song={song}
+            submitEditedSong={submitEditedSong}
+            toggleEditable={toggleEditable}
+          />
+        )}
         {!!song.lyrics && (
           <TextEditor
             editable={editable}
