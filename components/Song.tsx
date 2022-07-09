@@ -23,8 +23,8 @@ export const Song = ({
   genre,
   title,
   disabled = false,
-}: SongProps) => (
-  <ClickableSong href={id}>
+}: SongProps) => {
+  const SongElement = (
     <li
       className={cn('grid grid-cols-4 items-baseline gap-2 py-2.5', {
         'cursor-pointer hover:bg-stone-50 hover:pl-2 hover:font-bold':
@@ -48,5 +48,11 @@ export const Song = ({
         {genre || 'Unknown'}
       </span>
     </li>
-  </ClickableSong>
-);
+  );
+
+  return disabled ? (
+    SongElement
+  ) : (
+    <ClickableSong href={id}>{SongElement}</ClickableSong>
+  );
+};
