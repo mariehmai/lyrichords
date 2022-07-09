@@ -34,7 +34,7 @@ const Songs = () => {
           />
         </div>
         {showSongs && (
-          <ul className="mt-8 h-[50vh] overflow-scroll">
+          <div>
             <Song
               disabled
               id="default"
@@ -43,21 +43,23 @@ const Songs = () => {
               genre="Genre"
             />
             <Divider size="md" />
-            {loading ? (
-              <SongsPlaceholder />
-            ) : songs?.length === 0 ? (
-              <span className="my-4 flex justify-center text-sm text-stone-500">
-                No songs to display
-              </span>
-            ) : (
-              songs?.map((song) => (
-                <Fragment key={song.id}>
-                  <Song {...song} />
-                  <Divider />
-                </Fragment>
-              ))
-            )}
-          </ul>
+            <ul className="h-[50vh] overflow-scroll">
+              {loading ? (
+                <SongsPlaceholder />
+              ) : songs?.length === 0 ? (
+                <span className="my-4 flex justify-center text-sm text-stone-500">
+                  No songs to display
+                </span>
+              ) : (
+                songs?.map((song) => (
+                  <Fragment key={song.id}>
+                    <Song {...song} />
+                    <Divider />
+                  </Fragment>
+                ))
+              )}
+            </ul>
+          </div>
         )}
       </div>
     </Layout>

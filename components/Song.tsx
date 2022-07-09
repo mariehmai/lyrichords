@@ -27,8 +27,9 @@ export const Song = ({
   const SongElement = (
     <li
       className={cn('grid grid-cols-4 items-baseline gap-2 py-2.5', {
-        'cursor-pointer hover:bg-stone-50 hover:pl-2 hover:font-bold':
+        'cursor-pointer hover:bg-stone-50 hover:pl-2 hover:font-semibold':
           !disabled,
+        'font-semibold': disabled,
       })}
     >
       <span className="col-span-1 truncate text-sm uppercase text-stone-700">
