@@ -5,6 +5,7 @@ import {
   orderBy,
   doc,
   setDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import { database, auth } from '@lib/firebase/config';
@@ -61,3 +62,6 @@ export const useSong = (songId: Song['id'] = 'song-id') => {
 
 export const updateSong = async (id: string, body: UpdateSong) =>
   setDoc(doc(database, 'tracks', id), body);
+
+export const deleteSong = async (id: string) =>
+  deleteDoc(doc(database, 'tracks', id));

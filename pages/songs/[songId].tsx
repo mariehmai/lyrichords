@@ -5,16 +5,18 @@ import {
   ArrowSmLeftIcon,
   CheckIcon,
   PencilIcon,
+  TrashIcon,
   XIcon,
 } from '@heroicons/react/solid';
 import type { Editor } from '@tiptap/react';
-import { updateSong, useSong, type Song } from '@lib/songs/songs';
+import { updateSong, deleteSong, useSong, type Song } from '@lib/songs/songs';
 import { Layout } from '@components/Layout';
 import { IconButton } from '@components/IconButton';
 import TextEditor from '@components/TextEditor';
 import { SongLyricsPlaceholder } from '@components/SongLyricsPlaceholder';
 
 type SongEditorProps = {
+  goBack: () => void;
   editor: Editor;
   editable: boolean;
   song: Song;
@@ -23,6 +25,7 @@ type SongEditorProps = {
 };
 
 const SongHeader = ({
+  goBack,
   editor,
   editable,
   song,
@@ -32,6 +35,12 @@ const SongHeader = ({
   const cancelChanges = () => {
     editor.commands.setContent(JSON.parse(song.lyrics));
     toggleEditable(false);
+  };
+
+  const removeSong = async () => {
+    await deleteSong(song.id);
+
+    goBack();
   };
 
   return (
@@ -54,12 +63,20 @@ const SongHeader = ({
             />
           </>
         ) : (
-          <IconButton
-            title="Edit song"
-            size="md"
-            onClick={() => toggleEditable(true)}
-            Icon={PencilIcon}
-          />
+          <>
+            <IconButton
+              title="Edit song"
+              size="md"
+              onClick={() => toggleEditable(true)}
+              Icon={PencilIcon}
+            />
+            <IconButton
+              title="Delete song"
+              size="md"
+              onClick={removeSong}
+              Icon={TrashIcon}
+            />
+          </>
         )}
       </span>
       <h2 className="text-sm text-stone-700">{song?.artist}</h2>
@@ -121,6 +138,7 @@ const Song = () => {
             onUpdate={(content) => setLyrics(content)}
             Header={({ editor }) => (
               <SongHeader
+                goBack={router.back}
                 editor={editor}
                 editable={editable}
                 song={song}
