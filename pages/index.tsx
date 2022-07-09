@@ -1,24 +1,67 @@
-import type { NextPage } from 'next';
-import { Grid } from '@components/Grid';
-import { CardLink } from '@components/CardLink';
-import { Layout, MainContainer } from '@components/Layout';
+import React, { useState, Fragment } from 'react';
+import { useRouter } from 'next/router';
+import { EyeIcon, EyeOffIcon, DocumentAddIcon } from '@heroicons/react/solid';
+import { Layout } from '@components/Layout';
+import { IconButton } from '@components/IconButton';
+import { Divider } from '@components/Divider';
+import { useSongs } from '@lib/songs/songs';
+import { Song } from '@components/Song';
+import { SongsPlaceholder } from '@components/SongsPlaceholder';
 
-const Home: NextPage = () => (
-  <Layout>
-    <MainContainer>
-      <h1 className="m-0 text-center text-6xl">Lyrichords</h1>
-      <p className="my-16 text-center text-2xl">
-        A simple app to gather your favorite songs&apos; lyrics.
-      </p>
+const Songs = () => {
+  const [showSongs, setShowSongs] = useState(true);
+  const router = useRouter();
+  const { songs, loading } = useSongs();
 
-      <Grid>
-        <CardLink href="/songs">
-          <h2 className="mb-4 text-2xl font-semibold">View Songs &rarr;</h2>
-          <p className="m-0 text-lg">See the full list of songs lyrics</p>
-        </CardLink>
-      </Grid>
-    </MainContainer>
-  </Layout>
-);
+  const toggleSongsVisible = () => setShowSongs(!showSongs);
 
-export default Home;
+  const addNewSong = () => router.push(`/songs/new`);
+
+  return (
+    <Layout>
+      <div className="flex flex-col gap-4 py-8">
+        <div className="flex items-center gap-4">
+          <h1>Songs</h1>
+          <IconButton
+            title={showSongs ? 'Hide songs list' : 'Show songs list'}
+            onClick={toggleSongsVisible}
+            Icon={showSongs ? EyeOffIcon : EyeIcon}
+          />
+          <IconButton
+            title="Add new song"
+            onClick={addNewSong}
+            Icon={DocumentAddIcon}
+          />
+        </div>
+        {showSongs && (
+          <ul className="mt-8 h-[50vh] overflow-scroll">
+            <Song
+              disabled
+              id="default"
+              artist="Artist"
+              title="Title"
+              genre="Genre"
+            />
+            <Divider size="md" />
+            {loading ? (
+              <SongsPlaceholder />
+            ) : songs?.length === 0 ? (
+              <span className="my-4 flex justify-center text-sm text-stone-500">
+                No songs to display
+              </span>
+            ) : (
+              songs?.map((song) => (
+                <Fragment key={song.id}>
+                  <Song {...song} />
+                  <Divider />
+                </Fragment>
+              ))
+            )}
+          </ul>
+        )}
+      </div>
+    </Layout>
+  );
+};
+
+export default Songs;
