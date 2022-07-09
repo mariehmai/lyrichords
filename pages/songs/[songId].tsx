@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import {
@@ -78,11 +78,17 @@ const SongHeader = ({
 };
 
 const Song = () => {
-  const [lyrics, setLyrics] = useState<string>('');
   const [editable, setEditable] = useState<boolean>(false);
   const router = useRouter();
   const songId = router.query.songId as string;
   const { song, loading } = useSong(songId);
+  const [lyrics, setLyrics] = useState<string>('');
+
+  useEffect(() => {
+    if (!loading) {
+      setLyrics(song.lyrics);
+    }
+  }, [loading, song.lyrics]);
 
   const toggleEditable = (editable: boolean) => {
     setEditable(editable);
