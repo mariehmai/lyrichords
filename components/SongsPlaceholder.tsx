@@ -1,6 +1,6 @@
-import { Divider } from './Divider';
+import Divider from './Divider';
 
-export const SongsPlaceholder = () => (
+const SongsPlaceholder = () => (
   <div className="flex animate-pulse space-x-4">
     <div className="flex-1 space-y-2 py-1">
       <div className="grid grid-cols-4 items-center gap-2 py-2.5">
@@ -35,3 +35,5 @@ export const SongsPlaceholder = () => (
     </div>
   </div>
 );
+
+export default SongsPlaceholder;

@@ -5,7 +5,7 @@ type DividerProps = {
   size?: Size;
 };
 
-export const Divider = ({ size = 'sm' }: DividerProps) => (
+const Divider = ({ size = 'sm' }: DividerProps) => (
   <div
     className={cn('h-[1px] border-stone-300', {
       'border-b': size === 'sm',
@@ -13,3 +13,5 @@ export const Divider = ({ size = 'sm' }: DividerProps) => (
     })}
   ></div>
 );
+
+export default Divider;

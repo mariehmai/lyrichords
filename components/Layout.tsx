@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Footer } from './Footer';
-import { Navbar } from './Navbar';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 type LayoutProps = {
   withFooter?: boolean;
 };
 
-export const Layout = ({
+const Layout = ({
   withFooter = true,
   children,
 }: React.PropsWithChildren<LayoutProps>) => (
@@ -18,3 +18,5 @@ export const Layout = ({
     {withFooter && <Footer />}
   </div>
 );
+
+export default Layout;

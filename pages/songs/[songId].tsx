@@ -10,10 +10,10 @@ import {
 } from '@heroicons/react/solid';
 import type { Editor } from '@tiptap/react';
 import { updateSong, deleteSong, useSong, type Song } from '@lib/songs/songs';
-import { Layout } from '@components/Layout';
-import { IconButton } from '@components/IconButton';
+import Layout from '@components/Layout';
+import IconButton from '@components/IconButton';
 import TextEditor from '@components/TextEditor';
-import { SongLyricsPlaceholder } from '@components/SongLyricsPlaceholder';
+import SongLyricsPlaceholder from '@components/SongLyricsPlaceholder';
 
 type SongEditorProps = {
   goBack: () => void;

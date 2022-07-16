@@ -41,7 +41,7 @@ const InputField = ({ label, value, onChange }: InputFieldProps) => (
   </div>
 );
 
-export const CreateSongForm = React.forwardRef<
+const CreateSongForm = React.forwardRef<
   HTMLFormElement,
   React.PropsWithChildren<FormHTMLAttributes<HTMLFormElement>>
 >(({}, ref) => {
@@ -145,3 +145,5 @@ export const CreateSongForm = React.forwardRef<
 });
 
 CreateSongForm.displayName = 'CreateSongForm';
+
+export default CreateSongForm;

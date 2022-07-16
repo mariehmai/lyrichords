@@ -1,12 +1,12 @@
 import React, { useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
 import { EyeIcon, EyeOffIcon, DocumentAddIcon } from '@heroicons/react/solid';
-import { Layout } from '@components/Layout';
-import { IconButton } from '@components/IconButton';
-import { Divider } from '@components/Divider';
+import Layout from '@components/Layout';
+import IconButton from '@components/IconButton';
+import Divider from '@components/Divider';
 import { useSongs } from '@lib/songs/songs';
-import { Song } from '@components/Song';
-import { SongsPlaceholder } from '@components/SongsPlaceholder';
+import Song from '@components/Song';
+import SongsPlaceholder from '@components/SongsPlaceholder';
 
 const Songs = () => {
   const [showSongs, setShowSongs] = useState(true);

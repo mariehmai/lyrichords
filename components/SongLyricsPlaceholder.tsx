@@ -1,6 +1,6 @@
 import { PencilIcon } from '@heroicons/react/solid';
 
-export const SongLyricsPlaceholder = () => (
+const SongLyricsPlaceholder = () => (
   <div className="flex animate-pulse flex-col space-y-12">
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
@@ -70,3 +70,5 @@ export const SongLyricsPlaceholder = () => (
     </div>
   </div>
 );
+
+export default SongLyricsPlaceholder;

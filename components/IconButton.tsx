@@ -10,7 +10,7 @@ type IconButtonProps = {
   Icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 };
 
-export const IconButton = ({
+const IconButton = ({
   size = 'sm',
   title = '',
   label = '',
@@ -38,3 +38,5 @@ export const IconButton = ({
     )}
   </button>
 );
+
+export default IconButton;

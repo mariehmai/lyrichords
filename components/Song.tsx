@@ -17,13 +17,7 @@ type SongProps = {
   genre?: string;
 };
 
-export const Song = ({
-  id,
-  artist,
-  genre,
-  title,
-  disabled = false,
-}: SongProps) => {
+const Song = ({ id, artist, genre, title, disabled = false }: SongProps) => {
   const SongElement = (
     <li
       className={cn('grid grid-cols-4 items-baseline gap-2 py-2.5', {
@@ -57,3 +51,5 @@ export const Song = ({
     <ClickableSong href={id}>{SongElement}</ClickableSong>
   );
 };
+
+export default Song;
