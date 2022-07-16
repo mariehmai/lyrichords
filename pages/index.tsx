@@ -8,7 +8,7 @@ import { useSongs } from '@lib/songs/songs';
 import Song from '@components/Song';
 import SongsPlaceholder from '@components/SongsPlaceholder';
 
-const Songs = () => {
+const HomePage = () => {
   const [showSongs, setShowSongs] = useState(true);
   const router = useRouter();
   const { songs, loading } = useSongs();
@@ -66,4 +66,4 @@ const Songs = () => {
   );
 };
 
-export default Songs;
+export default HomePage;

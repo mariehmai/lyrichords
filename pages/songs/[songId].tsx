@@ -116,7 +116,7 @@ const SongHeader = ({
   );
 };
 
-const Song = () => {
+const SongPage = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const router = useRouter();
   const songId = router.query.songId as string;
@@ -184,4 +184,4 @@ const Song = () => {
   );
 };
 
-export default Song;
+export default SongPage;

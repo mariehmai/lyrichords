@@ -2,10 +2,10 @@ import React from 'react';
 import Layout from '@components/Layout';
 import CreateSongForm from '@components/CreateSongForm';
 
-const NewSong = () => (
+const NewSongPage = () => (
   <Layout>
     <CreateSongForm />
   </Layout>
 );
 
-export default NewSong;
+export default NewSongPage;
