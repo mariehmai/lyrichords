@@ -1,7 +1,7 @@
 import React, { useState, type FormHTMLAttributes } from 'react';
 import cn from 'classnames';
 import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
-import { saveSong } from '@lib/songs/songs';
+import { saveSong, type Song } from '@lib/songs/songs';
 import TextEditor from './TextEditor';
 
 type Genre =
@@ -43,33 +43,26 @@ function InputField({ label, value, onChange }: InputFieldProps) {
   );
 }
 
+const initialState = { title: '', artist: '', genre: '', lyrics: '' };
+
 export default React.forwardRef<
   HTMLFormElement,
   React.PropsWithChildren<FormHTMLAttributes<HTMLFormElement>>
 >(function CreateSongForm({}, ref) {
-  const [title, setTitle] = useState('');
-  const [artist, setArtist] = useState('');
-  const [genre, setGenre] = useState('');
+  const [state, setState] = useState<Omit<Song, 'id'>>(initialState);
   const [lyrics, setLyrics] = useState('');
   const [error, setError] = useState(false);
-
-  const resetForm = () => {
-    setTitle('');
-    setArtist('');
-    setGenre('');
-    setLyrics('');
-  };
 
   const submitNewSong = (e: React.MouseEvent) => {
     e.preventDefault();
 
     return saveSong({
-      title,
-      artist: artist || 'Unknown',
+      ...state,
       lyrics,
-      genre: genre || 'Unknown',
+      artist: state.artist || 'Unknown',
+      genre: state.genre || 'Unknown',
     })
-      .then(() => resetForm())
+      .then(() => setState(initialState))
       .catch(() => {
         setError(true);
       });
@@ -84,13 +77,13 @@ export default React.forwardRef<
       <div className="flex flex-row flex-wrap gap-4">
         <InputField
           label="Title*"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={state.title}
+          onChange={(e) => setState({ ...state, title: e.target.value })}
         />
         <InputField
           label="Artist"
-          value={artist}
-          onChange={(e) => setArtist(e.target.value)}
+          value={state.artist || ''}
+          onChange={(e) => setState({ ...state, artist: e.target.value })}
         />
         <div className="flex-0.5 flex flex-col gap-2">
           <label htmlFor="genre-select">Genre</label>
@@ -103,7 +96,7 @@ export default React.forwardRef<
               <option
                 key={genre}
                 value={genres[genre]}
-                onChange={() => setGenre(genre)}
+                onChange={() => setState({ ...state, genre })}
               >
                 {genre}
               </option>
@@ -121,10 +114,10 @@ export default React.forwardRef<
               className={cn(
                 'flex items-center gap-2 self-center rounded-lg bg-stone-600 py-2.5 px-4 font-bold text-white outline-red-400',
                 {
-                  'cursor-not-allowed bg-stone-300': !title,
+                  'cursor-not-allowed bg-stone-300': !state.title,
                 }
               )}
-              disabled={!title}
+              disabled={!state.title}
               onClick={async (e) => {
                 await submitNewSong(e);
                 editor.commands.clearContent();
