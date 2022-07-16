@@ -5,13 +5,15 @@ type DividerProps = {
   size?: Size;
 };
 
-const Divider = ({ size = 'sm' }: DividerProps) => (
-  <div
-    className={cn('h-[1px] border-stone-300', {
-      'border-b': size === 'sm',
-      'border-b-2 border-stone-600': size === 'md',
-    })}
-  ></div>
-);
+function Divider({ size = 'sm' }: DividerProps) {
+  return (
+    <div
+      className={cn('h-[1px] border-stone-300', {
+        'border-b': size === 'sm',
+        'border-b-2 border-stone-600': size === 'md',
+      })}
+    ></div>
+  );
+}
 
 export default Divider;

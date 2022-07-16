@@ -6,17 +6,19 @@ type LayoutProps = {
   withFooter?: boolean;
 };
 
-const Layout = ({
+function Layout({
   withFooter = true,
   children,
-}: React.PropsWithChildren<LayoutProps>) => (
-  <div className="flex h-full flex-col justify-between px-4 md:px-8">
-    <div className="flex grow flex-col">
-      <Navbar />
-      <div className="h-full pt-[60px]">{children}</div>
+}: React.PropsWithChildren<LayoutProps>) {
+  return (
+    <div className="flex h-full flex-col justify-between px-4 md:px-8">
+      <div className="flex grow flex-col">
+        <Navbar />
+        <div className="h-full pt-[60px]">{children}</div>
+      </div>
+      {withFooter && <Footer />}
     </div>
-    {withFooter && <Footer />}
-  </div>
-);
+  );
+}
 
 export default Layout;

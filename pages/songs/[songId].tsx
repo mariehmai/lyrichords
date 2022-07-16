@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import {
@@ -24,15 +24,15 @@ type SongEditorProps = {
   toggleEditable: (editable: boolean) => void;
 };
 
-const SongHeader = ({
+function SongHeader({
   goBack,
   editor,
   editable,
   song,
   submitEditedSong,
   toggleEditable,
-}: SongEditorProps) => {
-  const [showDelete, setShowDelete] = useState(false);
+}: SongEditorProps) {
+  const [showDelete, setShowDelete] = React.useState(false);
 
   const cancelChanges = () => {
     editor?.commands.setContent(JSON.parse(song.lyrics));
@@ -114,16 +114,16 @@ const SongHeader = ({
       </div>
     </div>
   );
-};
+}
 
-const SongPage = () => {
-  const [editable, setEditable] = useState<boolean>(false);
+function SongPage() {
+  const [editable, setEditable] = React.useState<boolean>(false);
   const router = useRouter();
   const songId = router.query.songId as string;
   const { song, loading } = useSong(songId);
-  const [lyrics, setLyrics] = useState<string>('');
+  const [lyrics, setLyrics] = React.useState<string>('');
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!loading) {
       setLyrics(song.lyrics);
     }
@@ -182,6 +182,6 @@ const SongPage = () => {
       </div>
     </Layout>
   );
-};
+}
 
 export default SongPage;

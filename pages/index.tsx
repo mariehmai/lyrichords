@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import * as React from 'react';
 import { useRouter } from 'next/router';
 import { EyeIcon, EyeOffIcon, DocumentAddIcon } from '@heroicons/react/solid';
 import Layout from '@components/Layout';
@@ -8,8 +8,8 @@ import { useSongs } from '@lib/songs/songs';
 import Song from '@components/Song';
 import SongsPlaceholder from '@components/SongsPlaceholder';
 
-const HomePage = () => {
-  const [showSongs, setShowSongs] = useState(true);
+function HomePage() {
+  const [showSongs, setShowSongs] = React.useState(true);
   const router = useRouter();
   const { songs, loading } = useSongs();
 
@@ -52,10 +52,10 @@ const HomePage = () => {
                 </span>
               ) : (
                 songs?.map((song) => (
-                  <Fragment key={song.id}>
+                  <React.Fragment key={song.id}>
                     <Song {...song} />
                     <Divider />
-                  </Fragment>
+                  </React.Fragment>
                 ))
               )}
             </ul>
@@ -64,6 +64,6 @@ const HomePage = () => {
       </div>
     </Layout>
   );
-};
+}
 
 export default HomePage;

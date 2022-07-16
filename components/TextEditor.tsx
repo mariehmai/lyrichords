@@ -1,7 +1,7 @@
+import * as React from 'react';
 import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import cn from 'classnames';
-import { useEffect } from 'react';
 
 type ElementWithEditor = ({ editor }: { editor: Editor }) => JSX.Element;
 
@@ -13,13 +13,13 @@ type EditorProps = {
   Footer?: ElementWithEditor;
 };
 
-const TextEditor = ({
+function TextEditor({
   content = '',
   editable = false,
   onUpdate,
   Header,
   Footer,
-}: EditorProps) => {
+}: EditorProps) {
   const editor = useEditor({
     extensions: [StarterKit],
     content: content ? JSON.parse(content) : '',
@@ -35,7 +35,7 @@ const TextEditor = ({
     },
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!editor) return;
 
     editor.setEditable(editable);
@@ -55,6 +55,6 @@ const TextEditor = ({
       {!!Footer && <Footer editor={editor} />}
     </>
   );
-};
+}
 
 export default TextEditor;

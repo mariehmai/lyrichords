@@ -29,22 +29,24 @@ type InputFieldProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputField = ({ label, value, onChange }: InputFieldProps) => (
-  <div className="flex flex-1 flex-col justify-center gap-2">
-    <label htmlFor={label}>{label}</label>
-    <input
-      className="rounded-md p-2 outline outline-stone-500 focus:outline-2 focus:outline-red-400"
-      id={label}
-      value={value}
-      onChange={onChange}
-    />
-  </div>
-);
+function InputField({ label, value, onChange }: InputFieldProps) {
+  return (
+    <div className="flex flex-1 flex-col justify-center gap-2">
+      <label htmlFor={label}>{label}</label>
+      <input
+        className="rounded-md p-2 outline outline-stone-500 focus:outline-2 focus:outline-red-400"
+        id={label}
+        value={value}
+        onChange={onChange}
+      />
+    </div>
+  );
+}
 
-const CreateSongForm = React.forwardRef<
+export default React.forwardRef<
   HTMLFormElement,
   React.PropsWithChildren<FormHTMLAttributes<HTMLFormElement>>
->(({}, ref) => {
+>(function CreateSongForm({}, ref) {
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [genre, setGenre] = useState('');
@@ -143,7 +145,3 @@ const CreateSongForm = React.forwardRef<
     </form>
   );
 });
-
-CreateSongForm.displayName = 'CreateSongForm';
-
-export default CreateSongForm;

@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import cn from 'classnames';
 
-const ClickableSong = ({
+function ClickableSong({
   children,
   href,
-}: React.PropsWithChildren<{ href: string }>) => (
-  <Link href={`/songs/${href}`}>{children}</Link>
-);
+}: React.PropsWithChildren<{ href: string }>) {
+  return <Link href={`/songs/${href}`}>{children}</Link>;
+}
 
 type SongProps = {
   disabled?: boolean;
@@ -17,7 +17,7 @@ type SongProps = {
   genre?: string;
 };
 
-const Song = ({ id, artist, genre, title, disabled = false }: SongProps) => {
+function Song({ id, artist, genre, title, disabled = false }: SongProps) {
   const SongElement = (
     <li
       className={cn('grid grid-cols-4 items-baseline gap-2 py-2.5', {
@@ -50,6 +50,6 @@ const Song = ({ id, artist, genre, title, disabled = false }: SongProps) => {
   ) : (
     <ClickableSong href={id}>{SongElement}</ClickableSong>
   );
-};
+}
 
 export default Song;
