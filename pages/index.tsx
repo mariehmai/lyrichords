@@ -18,52 +18,54 @@ function HomePage() {
   const addNewSong = () => router.push(`/songs/new`);
 
   return (
-    <Layout>
-      <div className="flex flex-col gap-4 py-8">
-        <div className="flex items-center gap-4">
-          <h1>Songs</h1>
-          <IconButton
-            title={showSongs ? 'Hide songs list' : 'Show songs list'}
-            onClick={toggleSongsVisible}
-            Icon={showSongs ? EyeOffIcon : EyeIcon}
-          />
-          <IconButton
-            title="Add new song"
-            onClick={addNewSong}
-            Icon={DocumentAddIcon}
-          />
-        </div>
-        {showSongs && (
-          <div>
-            <Song
-              disabled
-              id="default"
-              artist="Artist"
-              title="Title"
-              genre="Genre"
-            />
-            <Divider size="md" />
-            <ul className="h-[50vh] overflow-scroll">
-              {loading ? (
-                <SongsPlaceholder />
-              ) : songs?.length === 0 ? (
-                <span className="my-4 flex justify-center text-sm text-stone-500">
-                  No songs to display
-                </span>
-              ) : (
-                songs?.map((song) => (
-                  <React.Fragment key={song.id}>
-                    <Song {...song} />
-                    <Divider />
-                  </React.Fragment>
-                ))
-              )}
-            </ul>
-          </div>
-        )}
+    <div className="flex flex-col gap-4 py-8">
+      <div className="flex items-center gap-4">
+        <h1>Songs</h1>
+        <IconButton
+          title={showSongs ? 'Hide songs list' : 'Show songs list'}
+          onClick={toggleSongsVisible}
+          Icon={showSongs ? EyeOffIcon : EyeIcon}
+        />
+        <IconButton
+          title="Add new song"
+          onClick={addNewSong}
+          Icon={DocumentAddIcon}
+        />
       </div>
-    </Layout>
+      {showSongs && (
+        <div>
+          <Song
+            disabled
+            id="default"
+            artist="Artist"
+            title="Title"
+            genre="Genre"
+          />
+          <Divider size="md" />
+          <ul className="h-[50vh] overflow-scroll">
+            {loading ? (
+              <SongsPlaceholder />
+            ) : songs?.length === 0 ? (
+              <span className="my-4 flex justify-center text-sm text-stone-500">
+                No songs to display
+              </span>
+            ) : (
+              songs?.map((song) => (
+                <React.Fragment key={song.id}>
+                  <Song {...song} />
+                  <Divider />
+                </React.Fragment>
+              ))
+            )}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }
+
+HomePage.getLayout = function getLayout(page: React.ReactElement) {
+  return <Layout>{page}</Layout>;
+};
 
 export default HomePage;

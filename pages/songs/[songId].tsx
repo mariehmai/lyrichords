@@ -145,43 +145,45 @@ function SongPage() {
   };
 
   return (
-    <Layout withFooter={false}>
-      <div className="flex min-h-[90vh] flex-col gap-12 py-8">
-        <IconButton
-          label="Back to songs"
-          onClick={router.back}
-          Icon={ArrowSmLeftIcon}
+    <div className="flex min-h-[90vh] flex-col gap-12 py-8">
+      <IconButton
+        label="Back to songs"
+        onClick={router.back}
+        Icon={ArrowSmLeftIcon}
+      />
+      {loading && <SongLyricsPlaceholder />}
+      {!song.lyrics && (
+        <SongHeader
+          goBack={router.back}
+          editable={editable}
+          song={song}
+          submitEditedSong={submitEditedSong}
+          toggleEditable={toggleEditable}
         />
-        {loading && <SongLyricsPlaceholder />}
-        {!song.lyrics && (
-          <SongHeader
-            goBack={router.back}
-            editable={editable}
-            song={song}
-            submitEditedSong={submitEditedSong}
-            toggleEditable={toggleEditable}
-          />
-        )}
-        {!!song.lyrics && (
-          <TextEditor
-            editable={editable}
-            content={song.lyrics}
-            onUpdate={(content) => setLyrics(content)}
-            Header={({ editor }) => (
-              <SongHeader
-                goBack={router.back}
-                editor={editor}
-                editable={editable}
-                song={song}
-                submitEditedSong={submitEditedSong}
-                toggleEditable={toggleEditable}
-              />
-            )}
-          />
-        )}
-      </div>
-    </Layout>
+      )}
+      {!!song.lyrics && (
+        <TextEditor
+          editable={editable}
+          content={song.lyrics}
+          onUpdate={(content) => setLyrics(content)}
+          Header={({ editor }) => (
+            <SongHeader
+              goBack={router.back}
+              editor={editor}
+              editable={editable}
+              song={song}
+              submitEditedSong={submitEditedSong}
+              toggleEditable={toggleEditable}
+            />
+          )}
+        />
+      )}
+    </div>
   );
 }
+
+SongPage.getLayout = function getLayout(page: React.ReactElement) {
+  return <Layout withFooter={false}>{page}</Layout>;
+};
 
 export default SongPage;
