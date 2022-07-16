@@ -30,7 +30,7 @@ function TextEditor({
     editorProps: {
       attributes: {
         class:
-          'p-2 outline-none rounded-md bg-white min-h-[50vh] max-h-[90vh] overflow-auto focus:outline-2 focus:outline-red-400',
+          'p-2 outline-none rounded-md bg-white min-h-[50vh] focus:outline-2 focus:outline-red-400',
       },
     },
   });
