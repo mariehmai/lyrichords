@@ -1,10 +1,9 @@
-import * as React from 'react';
 import Layout from '@components/Layout';
 import SongListing from '@components/SongListing';
 
 function HomePage() {
   return (
-    <div className="flex flex-col gap-4 py-8">
+    <div className="flex flex-col gap-4 py-4 md:py-8">
       <SongListing />
     </div>
   );

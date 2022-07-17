@@ -41,7 +41,7 @@ function SongListing() {
             genre="Genre"
           />
           <Divider size="md" />
-          <ul className="h-[50vh] overflow-scroll">
+          <ul className="h-[60vh] overflow-scroll">
             {loading ? (
               <SongsPlaceholder />
             ) : songs?.length === 0 ? (
