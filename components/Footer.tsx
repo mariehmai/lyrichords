@@ -3,9 +3,9 @@ import ukulele from '../public/ukulele.jpeg';
 
 function Footer() {
   return (
-    <footer className="flex min-h-[4rem] items-center justify-center overflow-hidden">
+    <footer className="flex h-16 min-h-[4rem] items-center justify-center overflow-hidden">
       <Image
-        className="absolute opacity-20"
+        className="opacity-20"
         src={ukulele}
         alt="A ukulele with a bunch of people sat on the grass in the background."
         priority

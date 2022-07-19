@@ -7,7 +7,7 @@ function Title() {
 
 function Navbar() {
   return (
-    <nav className="fixed z-[100] flex h-[60px] w-full flex-row items-center bg-white bg-opacity-50 px-4 backdrop-blur-md md:px-8">
+    <nav className="fixed z-[100] flex h-16 w-full flex-row items-center bg-white bg-opacity-50 px-4 backdrop-blur-md md:px-8">
       <Link href="/">
         <div className="flex cursor-pointer flex-row items-center gap-2">
           <div className="-ml-2">
