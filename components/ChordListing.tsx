@@ -1,8 +1,10 @@
 import * as React from 'react';
+import Link from 'next/link';
 import {
   EyeOffIcon,
   EyeIcon,
   InformationCircleIcon,
+  ExternalLinkIcon,
 } from '@heroicons/react/solid';
 import IconButton from './IconButton';
 import Chord from './Chord';
@@ -26,9 +28,16 @@ function ChordListing() {
           onClick={() => {}}
           Icon={InformationCircleIcon}
         />
+        <Link href="/chords">
+          <IconButton
+            title="See all chords"
+            onClick={() => {}}
+            Icon={ExternalLinkIcon}
+          />
+        </Link>
       </div>
       {showChords && (
-        <div className="flex max-h-48 flex-wrap overflow-scroll md:max-h-56">
+        <div className="flex flex-wrap gap-2">
           <Chord name="A,,," strings="X 0 2 2 2 0" fingering="X X 2 3 4 X" />
           <Chord name="B,,," strings="X 2 4 4 4 2" fingering="X 1 2 3 4 1" />
           <Chord name="C,,," strings="X 3 2 0 1 0" fingering="X 3 2 X 1 X" />

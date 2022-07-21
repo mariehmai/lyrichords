@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { EyeOffIcon, EyeIcon, DocumentAddIcon } from '@heroicons/react/solid';
 import { useSongs } from '@lib/songs/songs';
 import Divider from './Divider';
@@ -9,12 +9,9 @@ import SongsPlaceholder from './SongsPlaceholder';
 
 function SongListing() {
   const [showSongs, setShowSongs] = React.useState(true);
-  const router = useRouter();
   const { songs, loading } = useSongs();
 
   const toggleSongsVisible = () => setShowSongs(!showSongs);
-
-  const addNewSong = () => router.push(`/songs/new`);
 
   return (
     <>
@@ -25,11 +22,13 @@ function SongListing() {
           onClick={toggleSongsVisible}
           Icon={showSongs ? EyeOffIcon : EyeIcon}
         />
-        <IconButton
-          title="Add new song"
-          onClick={addNewSong}
-          Icon={DocumentAddIcon}
-        />
+        <Link href="/songs/new">
+          <IconButton
+            title="Add new song"
+            onClick={() => {}}
+            Icon={DocumentAddIcon}
+          />
+        </Link>
       </div>
       {showSongs && (
         <div>

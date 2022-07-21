@@ -147,7 +147,7 @@ function SongPage() {
   return (
     <div className="flex min-h-[90vh] flex-col gap-12 py-8">
       <IconButton
-        label="Back to songs"
+        label="Back to home"
         onClick={router.back}
         Icon={ArrowSmLeftIcon}
       />
