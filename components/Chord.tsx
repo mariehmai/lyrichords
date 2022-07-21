@@ -276,7 +276,7 @@ function ChordNamePart({ chord }: { chord: string }) {
 }
 
 function Chord({
-  name = 'C,,,',
+  chordName = 'C,,,',
   strings = 'X 3 2 0 1 0',
   fingering = 'X 3 2 X 1 X',
 }) {
@@ -295,19 +295,20 @@ function Chord({
       style={{ overflow: 'hidden', position: 'relative' }}
     >
       <desc style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>
-        {name}
+        {chordName}
       </desc>
       <defs style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}></defs>
       <Grid />
       {chord.map((string, idx) =>
         ['O', 'X'].includes(string) ? (
           <StringAnnotation
+            key={idx}
             position={chord.length - 1 - idx}
             type={string as AnnotationType}
           />
         ) : null
       )}
-      <ChordNamePart chord={name} />
+      <ChordNamePart chord={chordName} />
       <FingerPosition strings={chord} fingers={fingers} />
       <FretStartNumber fret={fret} />
     </svg>
