@@ -245,6 +245,13 @@ type FingerPositionProps = {
 
 function FingerPosition({ strings, fingers }: FingerPositionProps) {
   const reverseIdx = strings.length - 1;
+  const multipleOnes = fingers
+    .map((finger, idx) => ({
+      finger,
+      idx,
+    }))
+    .filter(({ finger }) => finger === '1');
+  const hasStrikeout = (multipleOnes?.length || 0) > 1;
   return (
     <>
       {strings.map((str, idx) => {
@@ -253,40 +260,77 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
         const x = guitarFrets[parseInt(strings[idx])].x - 15;
         const y = guitarStrings[reverseIdx - idx].y;
         const finger = fingers[idx];
+        const isFirstOne = hasStrikeout && idx === multipleOnes[0].idx;
+        const strikePosition = (y - gridOrigin.offsetY) / 2;
 
         return (
           <React.Fragment key={idx}>
-            <circle
-              cx={x}
-              cy={y}
-              r="8"
-              fill={cn({
-                'rgb(17 94 89)': finger === '1',
-                'rgb(15 118 110)': finger === '2',
-                'rgb(13 148 136)': finger === '3',
-                'rgb(20 184 166)': finger === '4',
-              })}
-              stroke="none"
-              className="finger-position-shape bg-teal-800"
-              style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-            ></circle>
-            <text
-              x={x}
-              y={y}
-              textAnchor="middle"
-              fontSize="10px"
-              stroke="none"
-              fill="#ffffff"
-              style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-              className="finger-position-label"
-            >
-              <tspan
-                style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-                dy="3.5000007629394503"
-              >
-                {finger}
-              </tspan>
-            </text>
+            {(!hasStrikeout || (hasStrikeout && finger !== '1')) && (
+              <>
+                <circle
+                  cx={x}
+                  cy={y}
+                  r="8"
+                  fill={cn({
+                    'rgb(17 94 89)': finger === '1',
+                    'rgb(15 118 110)': finger === '2',
+                    'rgb(13 148 136)': finger === '3',
+                    'rgb(20 184 166)': finger === '4',
+                  })}
+                  stroke="none"
+                  className="finger-position-shape bg-teal-800"
+                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+                ></circle>
+                <text
+                  x={x}
+                  y={y}
+                  textAnchor="middle"
+                  fontSize="10px"
+                  stroke="none"
+                  fill="#ffffff"
+                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+                  className="finger-position-label"
+                >
+                  <tspan
+                    style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+                    dy="3.5000007629394503"
+                  >
+                    {finger}
+                  </tspan>
+                </text>
+              </>
+            )}
+            {hasStrikeout && isFirstOne && (
+              <>
+                <path
+                  fill="rgb(17 94 89)"
+                  stroke="#444444"
+                  d={`M${x - 5},${gridOrigin.offsetY}A5,5,0,0,1,${x + 5},${
+                    gridOrigin.offsetY
+                  }L${x + 5},${y}A5,5,0,0,1,${x - 5},${y}L${x - 5},36`}
+                  className="finger-position-shape"
+                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+                ></path>
+                <text
+                  x={x}
+                  y={gridOrigin.offsetY}
+                  textAnchor="middle"
+                  fontFamily='"Arial"'
+                  fontSize="10px"
+                  stroke="none"
+                  fill="#ffffff"
+                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+                  className="finger-position-label"
+                >
+                  <tspan
+                    style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+                    dy={strikePosition}
+                  >
+                    1
+                  </tspan>
+                </text>
+              </>
+            )}
           </React.Fragment>
         );
       })}
