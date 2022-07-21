@@ -5,7 +5,7 @@ type IconButtonProps = {
   size?: Size;
   title?: string;
   label?: string;
-  onClick: () => void;
+  onClick?: () => void;
   Icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 };
 
@@ -13,7 +13,7 @@ function IconButton({
   size = 'sm',
   title = '',
   label = '',
-  onClick,
+  onClick = () => {},
   Icon,
 }: IconButtonProps) {
   return (

@@ -23,11 +23,7 @@ function SongListing() {
           Icon={showSongs ? EyeOffIcon : EyeIcon}
         />
         <Link href="/songs/new">
-          <IconButton
-            title="Add new song"
-            onClick={() => {}}
-            Icon={DocumentAddIcon}
-          />
+          <IconButton title="Add new song" Icon={DocumentAddIcon} />
         </Link>
       </div>
       {showSongs && (

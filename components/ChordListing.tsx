@@ -25,15 +25,10 @@ function ChordListing() {
         />
         <IconButton
           title="Chords fetched from https://api.uberchord.com/"
-          onClick={() => {}}
           Icon={InformationCircleIcon}
         />
         <Link href="/chords">
-          <IconButton
-            title="See all chords"
-            onClick={() => {}}
-            Icon={ExternalLinkIcon}
-          />
+          <IconButton title="See all chords" Icon={ExternalLinkIcon} />
         </Link>
       </div>
       {showChords && (
