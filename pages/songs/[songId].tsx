@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import cn from 'classnames';
 import {
   ArrowSmLeftIcon,
@@ -146,11 +147,9 @@ function SongPage() {
 
   return (
     <div className="flex min-h-[90vh] flex-col gap-12 py-8">
-      <IconButton
-        label="Back to home"
-        onClick={router.back}
-        Icon={ArrowSmLeftIcon}
-      />
+      <Link href="/">
+        <IconButton label="Back to home" Icon={ArrowSmLeftIcon} />
+      </Link>
       {loading && <SongLyricsPlaceholder />}
       {!song.lyrics && (
         <SongHeader

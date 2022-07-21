@@ -18,7 +18,7 @@ function IconButton({
 }: IconButtonProps) {
   return (
     <button
-      className="group flex items-center gap-1 outline-red-600"
+      className="group flex items-center gap-1 outline-red-400"
       title={title}
       onClick={onClick}
     >
