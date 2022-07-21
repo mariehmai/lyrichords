@@ -6,9 +6,9 @@ import Layout from '@components/Layout';
 import IconButton from '@components/IconButton';
 import Chord from '@components/Chord';
 
-type ChordFilter = 'All' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+type ChordFilter = 'Base' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
 
-const chordFilters = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const chordFilters = ['Base', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 export const initialChords = [
   { chordName: 'A,,,', strings: 'X 0 2 2 2 0', fingering: 'X X 2 3 4 X' },
@@ -24,10 +24,10 @@ const Chords = () => {
   const router = useRouter();
   const [chords, setChords] = React.useState(initialChords);
   const [selectedFilter, setSelectedFilter] =
-    React.useState<ChordFilter>('All');
+    React.useState<ChordFilter>('Base');
 
   React.useEffect(() => {
-    if (selectedFilter === 'All') {
+    if (selectedFilter === 'Base') {
       setChords(initialChords);
       return;
     }
@@ -44,38 +44,38 @@ const Chords = () => {
 
   return (
     <Layout withFooter={false}>
-      <div className="flex flex-col gap-12 py-8">
+      <div className="flex flex-col gap-4 py-8">
         <IconButton
           label="Back to home"
           onClick={router.back}
           Icon={ArrowSmLeftIcon}
         />
-      </div>
-      <nav className="flex flex-row items-baseline gap-4 md:justify-center md:gap-6">
-        <span className="shrink-0 text-stone-700">Search by:</span>
-        <div className="flex gap-6 overflow-auto pb-2">
-          {chordFilters.map((filter) => (
-            <button
-              key={filter}
-              className={cn(
-                'text-lg text-stone-700 underline hover:font-bold hover:text-teal-600 md:text-2xl',
-                {
-                  'font-bold text-teal-600': filter === selectedFilter,
-                }
-              )}
-              onClick={(e) => {
-                setSelectedFilter(e.currentTarget.textContent as ChordFilter);
-              }}
-            >
-              {filter}
-            </button>
+        <nav className="flex flex-row items-baseline gap-4 md:justify-center md:gap-6">
+          <span className="shrink-0 text-stone-700">Search by:</span>
+          <div className="flex gap-6 overflow-auto pb-2">
+            {chordFilters.map((filter) => (
+              <button
+                key={filter}
+                className={cn(
+                  'text-lg text-stone-700 underline hover:font-bold hover:text-teal-600 md:text-2xl',
+                  {
+                    'font-bold text-teal-600': filter === selectedFilter,
+                  }
+                )}
+                onClick={(e) => {
+                  setSelectedFilter(e.currentTarget.textContent as ChordFilter);
+                }}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+        </nav>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {chords.map((chord) => (
+            <Chord key={chord.chordName} {...chord} />
           ))}
         </div>
-      </nav>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {chords.map((chord) => (
-          <Chord key={chord.chordName} {...chord} />
-        ))}
       </div>
     </Layout>
   );
