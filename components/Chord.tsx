@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cn from 'classnames';
 
 enum GuitarString {
   'E',
@@ -177,6 +178,7 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
 
         const x = guitarFrets[parseInt(strings[idx])].x - 15;
         const y = guitarStrings[reverseIdx - idx].y;
+        const finger = fingers[idx];
 
         return (
           <React.Fragment key={idx}>
@@ -184,9 +186,14 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
               cx={x}
               cy={y}
               r="8"
-              fill="#444444"
+              fill={cn({
+                'rgb(17 94 89)': finger === '1',
+                'rgb(15 118 110)': finger === '2',
+                'rgb(13 148 136)': finger === '3',
+                'rgb(20 184 166)': finger === '4',
+              })}
               stroke="none"
-              className="finger-position-shape"
+              className="finger-position-shape bg-teal-800"
               style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
             ></circle>
             <text
@@ -204,7 +211,7 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                 style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 dy="3.5000007629394503"
               >
-                {fingers[idx]}
+                {finger}
               </tspan>
             </text>
           </React.Fragment>
