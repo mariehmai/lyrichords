@@ -144,15 +144,11 @@ function FretStartNumber({ fret }: { fret: number }) {
         x="33.5"
         y="154"
         textAnchor="middle"
-        fontFamily='"Arial"'
         fontSize="16px"
         stroke="none"
         fill="#444444"
         style={{
           WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-          textAnchor: 'middle',
-          fontFamily: 'Arial',
-          fontSize: '16px',
         }}
         className="fret-start-number"
       >
@@ -200,7 +196,6 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
               x={x}
               y={y}
               textAnchor="middle"
-              fontFamily='"Arial"'
               fontSize="10px"
               stroke="none"
               fill="#ffffff"
@@ -229,7 +224,6 @@ function ChordNamePart({ chord }: { chord: string }) {
         x="22"
         y="14"
         textAnchor="start"
-        fontFamily="Helvetica Neue"
         fontSize="20px"
         stroke="none"
         fill="#444444"
@@ -247,7 +241,6 @@ function ChordNamePart({ chord }: { chord: string }) {
         x="37"
         y="15"
         textAnchor="start"
-        fontFamily="Helvetica Neue"
         fontSize="16px"
         stroke="none"
         fill="#444444"
@@ -265,7 +258,6 @@ function ChordNamePart({ chord }: { chord: string }) {
         x="63"
         y="10"
         textAnchor="start"
-        fontFamily="Helvetica Neue"
         fontSize="15px"
         stroke="none"
         fill="#444444"
