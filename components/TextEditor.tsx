@@ -2,8 +2,16 @@ import * as React from 'react';
 import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import cn from 'classnames';
+import {
+  ClipboardCheckIcon,
+  ClipboardCopyIcon,
+  ClipboardIcon,
+} from '@heroicons/react/outline';
+import IconButton from './IconButton';
 
 type ElementWithEditor = ({ editor }: { editor: Editor }) => JSX.Element;
+
+type CopyingStatus = 'saving' | 'done' | 'default';
 
 type EditorProps = {
   editable?: boolean;
@@ -13,6 +21,17 @@ type EditorProps = {
   Footer?: ElementWithEditor;
 };
 
+function getCopyingIcon(status: CopyingStatus) {
+  switch (status) {
+    case 'saving':
+      return ClipboardCopyIcon;
+    case 'done':
+      return ClipboardCheckIcon;
+    default:
+      return ClipboardIcon;
+  }
+}
+
 function TextEditor({
   content = '',
   editable = false,
@@ -20,6 +39,7 @@ function TextEditor({
   Header,
   Footer,
 }: EditorProps) {
+  const [copying, setCopying] = React.useState<CopyingStatus>('default');
   const editor = useEditor({
     extensions: [StarterKit],
     content: content ? JSON.parse(content) : '',
@@ -41,11 +61,32 @@ function TextEditor({
     editor.setEditable(editable);
   }, [editor, editable]);
 
+  React.useEffect(() => {
+    if (copying === 'done') {
+      setTimeout(() => {
+        setCopying('default');
+      }, 750);
+    }
+  }, [copying]);
+
   if (!editor) return null;
+
+  const selectText = async () => {
+    setCopying('saving');
+    await navigator.clipboard.writeText(editor.getText());
+    setCopying('done');
+  };
 
   return (
     <>
       {!!Header && <Header editor={editor} />}
+      <IconButton
+        label="Copy"
+        withBorder
+        disabled={copying !== 'default'}
+        onClick={selectText}
+        Icon={getCopyingIcon(copying)}
+      />
       <EditorContent
         editor={editor}
         className={cn('rounded-lg', {
