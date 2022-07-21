@@ -49,12 +49,12 @@ const Chords = () => {
         </Link>
         <nav className="flex flex-row items-baseline gap-4 md:justify-center md:gap-6">
           <span className="shrink-0 text-stone-700">Search by:</span>
-          <div className="flex gap-6 overflow-auto pb-2">
+          <div className="flex gap-6 overflow-auto p-1">
             {chordFilters.map((filter) => (
               <button
                 key={filter}
                 className={cn(
-                  'text-lg text-stone-700 underline hover:font-bold hover:text-teal-600 md:text-2xl',
+                  'text-lg text-stone-700 underline outline-offset-1 outline-teal-600 hover:font-bold hover:text-teal-600 md:text-2xl',
                   {
                     'font-bold text-teal-600': filter === selectedFilter,
                   }
