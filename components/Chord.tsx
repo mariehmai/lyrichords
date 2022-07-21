@@ -137,7 +137,7 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
   );
 }
 
-function FretStartNumber({ fret }: { fret: number }) {
+export function FretStartNumber({ fret }: { fret: number }) {
   return (
     <>
       <text
@@ -282,7 +282,7 @@ function Chord({
 }) {
   const chord = strings.split(' ');
   const fingers = fingering.split(' ');
-  const fret = 1;
+  // const fret = 1;
 
   return (
     <svg
@@ -310,7 +310,7 @@ function Chord({
       )}
       <ChordNamePart chord={chordName} />
       <FingerPosition strings={chord} fingers={fingers} />
-      <FretStartNumber fret={fret} />
+      {/* <FretStartNumber fret={fret} /> */}
     </svg>
   );
 }
