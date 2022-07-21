@@ -46,7 +46,7 @@ const Chords = () => {
         <IconLink label="Back to home" href="/" Icon={ArrowSmLeftIcon} />
         <nav className="flex flex-row items-baseline gap-4 md:justify-center md:gap-6">
           <span className="shrink-0 text-stone-700">Search by:</span>
-          <div className="flex gap-6 overflow-auto p-1">
+          <div className="flex gap-6 overflow-auto p-1 pb-3">
             {chordFilters.map((filter) => (
               <button
                 key={filter}

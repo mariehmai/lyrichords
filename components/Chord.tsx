@@ -63,6 +63,9 @@ const gridOrigin = {
   lengthFret: 136,
 };
 
+const fretGap = 30;
+const stringGap = 10;
+
 type FretProps = {
   x: number;
   y: number;
@@ -95,7 +98,7 @@ function ChordString({
 }) {
   return (
     <text
-      x={gridOrigin.lengthString + 10}
+      x={gridOrigin.lengthString + stringGap}
       y={guitarStrings[position].y - 1}
       textAnchor="middle"
       fontSize="12px"
@@ -122,7 +125,7 @@ const guitarFrets: FretProps[] = Array(6)
   })
   .reduce((previous, current, idx) => {
     if (idx === 0) return [current];
-    const gap = previous[idx - 1].x + 30;
+    const gap = previous[idx - 1].x + fretGap;
     return [...previous, { ...current, x: gap, lengthString: gap }];
   }, []);
 
@@ -304,7 +307,6 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
               <>
                 <path
                   fill="rgb(17 94 89)"
-                  stroke="#444444"
                   d={`M${x - 5},${gridOrigin.offsetY}A5,5,0,0,1,${x + 5},${
                     gridOrigin.offsetY
                   }L${x + 5},${y}A5,5,0,0,1,${x - 5},${y}L${x - 5},36`}
@@ -408,9 +410,8 @@ function Chord({
 
   return (
     <svg
-      height="162"
       version="1.1"
-      width="200"
+      className="h-[80px] w-[100px] md:h-[162px] md:w-[200px]"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 200 162"
