@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Link from 'next/link';
 import cn from 'classnames';
 import { ArrowSmLeftIcon } from '@heroicons/react/solid';
 import Layout from '@components/Layout';
-import IconButton from '@components/IconButton';
+import IconLink from '@components/IconLink';
 import Chord from '@components/Chord';
 
 type ChordFilter = 'Base' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
@@ -44,9 +43,7 @@ const Chords = () => {
   return (
     <Layout withFooter={false}>
       <div className="flex flex-col gap-4 py-8">
-        <Link href="/">
-          <IconButton label="Back to home" Icon={ArrowSmLeftIcon} />
-        </Link>
+        <IconLink label="Back to home" href="/" Icon={ArrowSmLeftIcon} />
         <nav className="flex flex-row items-baseline gap-4 md:justify-center md:gap-6">
           <span className="shrink-0 text-stone-700">Search by:</span>
           <div className="flex gap-6 overflow-auto p-1">

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Link from 'next/link';
 import { EyeOffIcon, EyeIcon, DocumentAddIcon } from '@heroicons/react/solid';
 import { useSongs } from '@lib/songs/songs';
 import Divider from './Divider';
 import IconButton from './IconButton';
+import IconLink from './IconLink';
 import Song from './Song';
 import SongsPlaceholder from './SongsPlaceholder';
 
@@ -22,9 +22,11 @@ function SongListing() {
           onClick={toggleSongsVisible}
           Icon={showSongs ? EyeOffIcon : EyeIcon}
         />
-        <Link href="/songs/new">
-          <IconButton title="Add new song" Icon={DocumentAddIcon} />
-        </Link>
+        <IconLink
+          href="/songs/new"
+          title="Add new song"
+          Icon={DocumentAddIcon}
+        />
       </div>
       {showSongs && (
         <div>

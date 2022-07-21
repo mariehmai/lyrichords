@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from 'next/link';
 import {
   EyeOffIcon,
   EyeIcon,
@@ -7,6 +6,7 @@ import {
   ExternalLinkIcon,
 } from '@heroicons/react/solid';
 import IconButton from './IconButton';
+import IconLink from './IconLink';
 import Chord from './Chord';
 import { initialChords } from 'pages/chords';
 
@@ -28,9 +28,11 @@ function ChordListing() {
           title="Chords fetched from https://api.uberchord.com/"
           Icon={InformationCircleIcon}
         />
-        <Link href="/chords">
-          <IconButton title="See all chords" Icon={ExternalLinkIcon} />
-        </Link>
+        <IconLink
+          href="/chords"
+          title="See all chords"
+          Icon={ExternalLinkIcon}
+        />
       </div>
       {showChords && (
         <div className="flex flex-wrap gap-2">

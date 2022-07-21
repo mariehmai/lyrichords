@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import cn from 'classnames';
 import {
   ArrowSmLeftIcon,
@@ -13,6 +12,7 @@ import type { Editor } from '@tiptap/react';
 import { updateSong, deleteSong, useSong, type Song } from '@lib/songs/songs';
 import Layout from '@components/Layout';
 import IconButton from '@components/IconButton';
+import IconLink from '@components/IconLink';
 import TextEditor from '@components/TextEditor';
 import SongLyricsPlaceholder from '@components/SongLyricsPlaceholder';
 
@@ -147,9 +147,7 @@ function SongPage() {
 
   return (
     <div className="flex min-h-[90vh] flex-col gap-12 py-8">
-      <Link href="/">
-        <IconButton label="Back to home" Icon={ArrowSmLeftIcon} />
-      </Link>
+      <IconLink href="/" label="Back to home" Icon={ArrowSmLeftIcon} />
       {loading && <SongLyricsPlaceholder />}
       {!song.lyrics && (
         <SongHeader
