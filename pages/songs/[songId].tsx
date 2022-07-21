@@ -146,7 +146,7 @@ function SongPage() {
   };
 
   return (
-    <div className="flex min-h-[90vh] flex-col gap-12 py-8">
+    <div className="flex min-h-[90vh] flex-col gap-6 py-8">
       <IconLink href="/" label="Back to home" Icon={ArrowSmLeftIcon} />
       {loading && <SongLyricsPlaceholder />}
       {!song.lyrics && (
