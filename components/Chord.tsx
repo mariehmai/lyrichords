@@ -1,21 +1,65 @@
 import * as React from 'react';
 import cn from 'classnames';
 
-enum GuitarString {
-  'E',
-  'A',
-  'D',
-  'G',
-  'B',
-  'E2',
-}
+type GuitarString =
+  | {
+      position: 0;
+      stringLabel: 'E2';
+    }
+  | {
+      position: 1;
+      stringLabel: 'B';
+    }
+  | {
+      position: 2;
+      stringLabel: 'G';
+    }
+  | {
+      position: 3;
+      stringLabel: 'D';
+    }
+  | {
+      position: 4;
+      stringLabel: 'A';
+    }
+  | {
+      position: 5;
+      stringLabel: 'E';
+    };
+
+const gStrings: GuitarString[] = [
+  {
+    position: 0,
+    stringLabel: 'E2',
+  },
+  {
+    position: 1,
+    stringLabel: 'B',
+  },
+  {
+    position: 2,
+    stringLabel: 'G',
+  },
+  {
+    position: 3,
+    stringLabel: 'D',
+  },
+  {
+    position: 4,
+    stringLabel: 'A',
+  },
+  {
+    position: 5,
+    stringLabel: 'E',
+  },
+];
 
 type AnnotationType = '0' | 'X';
 
 const gridOrigin = {
   offsetX: 20,
   offsetY: 36,
-  lengthString: 140,
+  lengthString: 170,
   lengthFret: 136,
 };
 
@@ -39,6 +83,33 @@ function Fret({
       d={`M${x},${y}L${lengthString},${lengthFret}`}
       style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
     ></path>
+  );
+}
+
+function ChordString({
+  position,
+  stringLabel,
+}: {
+  position: GuitarString['position'];
+  stringLabel: GuitarString['stringLabel'];
+}) {
+  return (
+    <text
+      x={gridOrigin.lengthString + 10}
+      y={guitarStrings[position].y - 1}
+      textAnchor="middle"
+      fontSize="12px"
+      stroke="none"
+      fill="#444444"
+      style={{
+        WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+      }}
+      className="fret-start-number"
+    >
+      <tspan style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} dy="5.5">
+        {stringLabel}
+      </tspan>
+    </text>
   );
 }
 
@@ -74,8 +145,15 @@ function Grid() {
       {guitarFrets.map((fret, idx) => (
         <Fret key={idx} {...fret} />
       ))}
-      {guitarStrings.map((string, idx) => (
-        <Fret key={idx} {...string} />
+      {guitarStrings.map((str, idx) => (
+        <Fret key={idx} {...str} />
+      ))}
+      {gStrings.map((str) => (
+        <ChordString
+          key={str.stringLabel}
+          position={str.position}
+          stringLabel={str.stringLabel}
+        />
       ))}
       <rect
         x="16"
@@ -93,7 +171,7 @@ function Grid() {
 }
 
 type StringAnnotationProps = {
-  position: GuitarString;
+  position: GuitarString['position'];
   type: AnnotationType;
 };
 
@@ -288,10 +366,10 @@ function Chord({
     <svg
       height="162"
       version="1.1"
-      width="147"
+      width="200"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      viewBox="0 0 147 162"
+      viewBox="0 0 200 162"
       style={{ overflow: 'hidden', position: 'relative' }}
     >
       <desc style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>
@@ -299,12 +377,12 @@ function Chord({
       </desc>
       <defs style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}></defs>
       <Grid />
-      {chord.map((string, idx) =>
-        ['0', 'X'].includes(string) ? (
+      {chord.map((str, idx) =>
+        ['0', 'X'].includes(str) ? (
           <StringAnnotation
             key={idx}
-            position={chord.length - 1 - idx}
-            type={string as AnnotationType}
+            position={(chord.length - 1 - idx) as GuitarString['position']}
+            type={str as AnnotationType}
           />
         ) : null
       )}
