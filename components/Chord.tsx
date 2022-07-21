@@ -10,7 +10,7 @@ enum GuitarString {
   'E2',
 }
 
-type AnnotationType = 'O' | 'X';
+type AnnotationType = '0' | 'X';
 
 const gridOrigin = {
   offsetX: 20,
@@ -122,7 +122,7 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
           ></path>
         </>
       )}
-      {type === 'O' && (
+      {type === '0' && (
         <circle
           cx="6"
           cy={guitarStrings[position].y}
@@ -300,7 +300,7 @@ function Chord({
       <defs style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}></defs>
       <Grid />
       {chord.map((string, idx) =>
-        ['O', 'X'].includes(string) ? (
+        ['0', 'X'].includes(string) ? (
           <StringAnnotation
             key={idx}
             position={chord.length - 1 - idx}
