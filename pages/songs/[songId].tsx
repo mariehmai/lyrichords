@@ -49,7 +49,7 @@ function SongHeader({
   return (
     <div>
       {showDelete && (
-        <dialog className="rounded-lg shadow-md" open={showDelete}>
+        <dialog className="z-[100] rounded-lg shadow-md" open={showDelete}>
           <h1>Are you sure you want to delete the song?</h1>
           <h4 className="text-stone-500">This operation is irreversible.</h4>
           <div className="flew-row mt-2 flex justify-end space-x-2">
@@ -60,7 +60,7 @@ function SongHeader({
               Cancel
             </button>
             <button
-              className="rounded bg-red-200 px-3 py-1 text-sm"
+              className="rounded bg-red-600 px-3 py-1 text-sm text-white"
               onClick={removeSong}
             >
               Confirm
