@@ -2,7 +2,7 @@ import React, { useState, type FormHTMLAttributes } from 'react';
 import cn from 'classnames';
 import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
 import { saveSong, type Song } from '@lib/songs/songs';
-import TextEditor from './TextEditor';
+import TextEditor from './editor/TextEditor';
 
 type Genre =
   | 'Pop'
@@ -34,7 +34,7 @@ function InputField({ label, value, onChange }: InputFieldProps) {
     <div className="flex flex-1 flex-col justify-center gap-2">
       <label htmlFor={label}>{label}</label>
       <input
-        className="rounded-md p-2 outline outline-stone-500 focus:outline-2 focus:outline-red-400"
+        className="rounded-md p-2 outline outline-2 outline-stone-500 focus:outline-red-400"
         id={label}
         value={value}
         onChange={onChange}
@@ -86,22 +86,23 @@ export default React.forwardRef<
           onChange={(e) => setState({ ...state, artist: e.target.value })}
         />
         <div className="flex-0.5 flex flex-col gap-2">
-          <label htmlFor="genre-select">Genre</label>
-          <select
-            id="Genre"
-            className="appearance-none rounded-md border-2 border-stone-500 p-2 py-2.5 outline-2 focus:outline-red-400"
-          >
-            <option value="">--Choose a genre--</option>
-            {Object.keys(genres).map((genre) => (
-              <option
-                key={genre}
-                value={genres[genre]}
-                onChange={() => setState({ ...state, genre })}
-              >
-                {genre}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="select-genre">Genre</label>
+          <div className="combo min-w-[150px]">
+            <select
+              id="select-genre"
+              className="py-1.75 w-full appearance-none rounded-lg border-2 border-stone-500 p-2 outline-2 focus:outline-red-400"
+            >
+              {Object.keys(genres).map((genre) => (
+                <option
+                  key={genre}
+                  value={genres[genre]}
+                  onChange={() => setState({ ...state, genre })}
+                >
+                  {genres[genre]}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-2">

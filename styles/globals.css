@@ -23,6 +23,18 @@
   h2 {
     @apply text-xl;
   }
+
+  .combo {
+    @apply relative min-w-[80px];
+  }
+
+  .combo::after {
+    @apply pointer-events-none absolute top-[50%] right-[12px] h-[8px] w-[8px];
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    border-right: 2px solid rgba(0, 0, 0, 0.5);
+    content: '';
+    transform: translate(0, -65%) rotate(45deg);
+  }
 }
 
 @layer utilities {

@@ -13,7 +13,7 @@ import { updateSong, deleteSong, useSong, type Song } from '@lib/songs/songs';
 import Layout from '@components/Layout';
 import IconButton from '@components/IconButton';
 import IconLink from '@components/IconLink';
-import TextEditor from '@components/TextEditor';
+import TextEditor from '@components/editor/TextEditor';
 import SongLyricsPlaceholder from '@components/SongLyricsPlaceholder';
 
 type SongEditorProps = {
