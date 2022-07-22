@@ -11,7 +11,7 @@ type IconButtonProps = {
   Icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 };
 
-function IconButton({
+function IconLink({
   href,
   size = 'sm',
   title = '',
@@ -44,4 +44,4 @@ function IconButton({
   );
 }
 
-export default IconButton;
+export default IconLink;
