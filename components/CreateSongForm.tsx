@@ -43,7 +43,7 @@ function InputField({ label, value, onChange }: InputFieldProps) {
   );
 }
 
-const initialState = { title: '', artist: '', genre: '', lyrics: '' };
+const initialState = { title: '', artist: '', genre: 'Pop', lyrics: '' };
 
 export default React.forwardRef<
   HTMLFormElement,
@@ -91,13 +91,10 @@ export default React.forwardRef<
             <select
               id="select-genre"
               className="py-1.75 w-full appearance-none rounded-lg border-2 border-stone-500 p-2 outline-2 focus:outline-red-400"
+              onChange={(e) => setState({ ...state, genre: e.target.value })}
             >
               {Object.keys(genres).map((genre) => (
-                <option
-                  key={genre}
-                  value={genres[genre]}
-                  onChange={() => setState({ ...state, genre })}
-                >
+                <option key={genre} value={genres[genre]}>
                   {genres[genre]}
                 </option>
               ))}
