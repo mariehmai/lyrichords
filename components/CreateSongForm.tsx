@@ -69,7 +69,7 @@ export default React.forwardRef<
   };
 
   return (
-    <form ref={ref}>
+    <form ref={ref} className="flex flex-col gap-2">
       <span className="mb-2 flex items-center gap-2">
         <h1>Add new song</h1>
         <MusicNoteIcon className="h-7 w-7 text-stone-600" />
