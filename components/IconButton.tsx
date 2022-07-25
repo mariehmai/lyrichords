@@ -28,11 +28,10 @@ function IconButton({
   return (
     <button
       className={cn(
-        'group flex w-fit items-center gap-1 outline-red-400 active:shadow-inner',
+        'group flex w-fit items-center gap-1 outline-red-400 active:shadow-inner disabled:opacity-70',
         {
           'rounded-md border-2 border-stone-500 px-1.5 py-0.5 hover:shadow-sm':
             withBorder,
-          'opacity-80': disabled,
         }
       )}
       title={title}
@@ -43,10 +42,15 @@ function IconButton({
         className={cn('cursor-pointer border-0 border-none text-stone-600', {
           'h-5 w-5': size === 'sm',
           'h-7 w-7': size === 'md',
+          'cursor-default': disabled,
         })}
       />
       {!!label && (
-        <span className={cn('text-sm text-stone-600 group-hover:underline')}>
+        <span
+          className={cn('text-sm text-stone-600 group-hover:underline', {
+            'group-hover:no-underline': disabled,
+          })}
+        >
           {label}
         </span>
       )}
