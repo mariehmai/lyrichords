@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { type Editor } from '@tiptap/react';
 import {
+  BackspaceIcon,
   ClipboardCheckIcon,
   ClipboardCopyIcon,
   ClipboardIcon,
@@ -37,8 +38,13 @@ function EditorMenu({ editor }: EditorMenuProps) {
 
   const selectText = async () => {
     setCopying('saving');
+    editor.chain().focus().selectAll().run();
     await navigator.clipboard.writeText(editor.getText());
     setCopying('done');
+  };
+
+  const clearText = () => {
+    editor.commands.clearContent();
   };
 
   return (
@@ -54,6 +60,12 @@ function EditorMenu({ editor }: EditorMenuProps) {
             disabled={copying !== 'default'}
             onClick={selectText}
             Icon={getCopyingIcon(copying)}
+          />
+          <IconButton
+            label="Clear all"
+            withBorder
+            onClick={clearText}
+            Icon={BackspaceIcon}
           />
         </div>
       </div>

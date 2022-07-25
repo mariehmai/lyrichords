@@ -20,6 +20,11 @@ function IconButton({
   disabled = false,
   Icon,
 }: IconButtonProps) {
+  const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    onClick();
+  };
+
   return (
     <button
       className={cn(
@@ -32,7 +37,7 @@ function IconButton({
       )}
       title={title}
       disabled={disabled}
-      onClick={onClick}
+      onClick={onButtonClick}
     >
       <Icon
         className={cn('cursor-pointer border-0 border-none text-stone-600', {
