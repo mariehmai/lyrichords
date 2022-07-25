@@ -70,6 +70,7 @@ function EditorMenu({ editor }: EditorMenuProps) {
           <IconButton
             label="Clear all"
             withBorder
+            disabled={editor.isEmpty}
             onClick={clearText}
             Icon={BackspaceIcon}
           />
