@@ -63,7 +63,7 @@ function EditorMenu({ editor }: EditorMenuProps) {
           <IconButton
             label="Copy"
             withBorder
-            disabled={copying !== 'default'}
+            disabled={copying !== 'default' || editor.isEmpty}
             onClick={selectText}
             Icon={getCopyingIcon(copying)}
           />
