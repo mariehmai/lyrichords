@@ -6,7 +6,9 @@ import {
   mergeAttributes,
 } from '@tiptap/react';
 
-type ChordName = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+export type ChordName = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+
+export const chordNames: ChordName[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 export interface ChordOptions {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,15 +21,19 @@ declare module '@tiptap/react' {
       /**
        * Set a chord mark
        */
-      setChord: (attributes?: { chord: ChordName }) => ReturnType;
+      setChord: () => ReturnType;
       /**
        * Toggle inline chord
        */
-      toggleChord: (attributes?: { chord: ChordName }) => ReturnType;
+      toggleChord: () => ReturnType;
       /**
        * Unset a chord mark
        */
       unsetChord: () => ReturnType;
+      /**
+       * Insert a new chord mark
+       */
+      insertChord: (attributes?: { chord: ChordName }) => ReturnType;
     };
   }
 }
@@ -75,19 +81,39 @@ export const Chord = Mark.create<ChordOptions>({
   addCommands() {
     return {
       setChord:
-        (attributes) =>
+        () =>
         ({ commands }) => {
-          return commands.setMark(this.name, attributes);
+          return commands.setMark(this.name);
         },
       toggleChord:
-        (attributes) =>
+        () =>
         ({ commands }) => {
-          return commands.toggleMark(this.name, attributes);
+          return commands.toggleMark(this.name);
         },
       unsetChord:
         () =>
         ({ commands }) => {
           return commands.unsetMark(this.name);
+        },
+      insertChord:
+        (attributes) =>
+        ({ commands, chain }) => {
+          return commands.command(() => {
+            return chain()
+              .insertContent([
+                {
+                  type: 'text',
+                  text: attributes?.chord,
+                  marks: [{ type: this.name }],
+                },
+                {
+                  type: 'text',
+                  text: ' ',
+                },
+              ])
+              .focus()
+              .run();
+          });
         },
     };
   },
