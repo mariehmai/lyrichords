@@ -3,6 +3,7 @@ import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import cn from 'classnames';
 import EditorMenu from './EditorMenu';
+import { Chord } from './extensions/chord';
 
 type ElementWithEditor = ({ editor }: { editor: Editor }) => JSX.Element;
 
@@ -22,7 +23,7 @@ function TextEditor({
   Footer,
 }: EditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, Chord],
     content: content ? JSON.parse(content) : '',
     editable,
     onUpdate: ({ editor }) => {
