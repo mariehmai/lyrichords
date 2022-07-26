@@ -54,8 +54,7 @@ export const Chord = Mark.create<ChordOptions>({
     return {
       chord: {
         default: null,
-        parseHTML: (element) =>
-          element.getAttribute('data-chord') || element.style.textDecoration,
+        parseHTML: (element) => element.getAttribute('data-chord'),
         renderHTML: (attributes) => {
           return {
             'data-chord': attributes.chord,
@@ -101,18 +100,23 @@ export const Chord = Mark.create<ChordOptions>({
         ({ commands, chain }) => {
           return commands.command(() => {
             return chain()
+              .focus()
               .insertContent([
                 {
                   type: 'text',
                   text: attributes?.chord,
-                  marks: [{ type: this.name }],
+                  marks: [
+                    {
+                      type: this.name,
+                      attrs: { chord: attributes?.chord },
+                    },
+                  ],
                 },
                 {
                   type: 'text',
                   text: ' ',
                 },
               ])
-              .focus()
               .run();
           });
         },
