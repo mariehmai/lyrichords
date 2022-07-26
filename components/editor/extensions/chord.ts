@@ -59,7 +59,8 @@ export const Chord = Mark.create<ChordOptions>({
         renderHTML: (attributes) => {
           return {
             'data-chord': attributes.chord,
-            style: `cursor: pointer; text-decoration: underline;`,
+            class:
+              'cursor-pointer shadow-md border rounded py-0.25 px-0.5 hover:underline bg-stone-100 text-sm text-stone-700',
           };
         },
       },
