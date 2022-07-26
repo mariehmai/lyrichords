@@ -32,7 +32,7 @@ function TextEditor({
     editorProps: {
       attributes: {
         class:
-          'p-2 outline-none rounded-b-md bg-white min-h-[50vh] focus:border-2 focus:border-red-400',
+          'p-2 outline-none rounded-b-md bg-white min-h-[50vh] focus:ring-2 focus:ring-red-400',
       },
     },
   });
@@ -53,7 +53,7 @@ function TextEditor({
         <EditorContent
           editor={editor}
           className={cn('rounded-b-lg', {
-            'border-2 border-stone-500 focus:border-none': editable,
+            'border-2 border-stone-500': editable,
           })}
         />
       </div>
