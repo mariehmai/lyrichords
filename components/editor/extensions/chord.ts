@@ -78,6 +78,8 @@ export const Chord = Mark.create<ChordOptions>({
     ];
   },
 
+  keepOnSplit: false,
+
   addCommands() {
     return {
       setChord:
