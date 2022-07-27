@@ -403,6 +403,7 @@ function Chord({
   chordName = 'C,,,',
   strings = 'X 3 2 0 1 0',
   fingering = 'X 3 2 X 1 X',
+  type = 'default',
 }) {
   const chord = strings.split(' ');
   const fingers = fingering.split(' ');
@@ -411,10 +412,12 @@ function Chord({
   return (
     <svg
       version="1.1"
-      className="h-[80px] w-[100px] md:h-[162px] md:w-[200px]"
+      className={cn('h-[80px] w-[100px] md:h-[162px] md:w-[200px]', {
+        'rounded-lg bg-stone-50 shadow-xl': type === 'info',
+      })}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      viewBox="0 0 200 162"
+      viewBox="0 0 190 162"
       style={{ overflow: 'hidden', position: 'relative' }}
     >
       <desc style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>
