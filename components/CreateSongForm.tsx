@@ -1,7 +1,7 @@
-import React, { useState, type FormHTMLAttributes } from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
-import { saveSong, type Song } from '@lib/songs/songs';
+import { saveSong } from '@lib/songs/songs';
 import TextEditor from './editor/TextEditor';
 
 type Genre =
@@ -24,18 +24,20 @@ const genres: Record<string, Genre> = {
 };
 
 type InputFieldProps = {
+  name: string;
   label: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function InputField({ label, value, onChange }: InputFieldProps) {
+function InputField({ name, label, value, onChange }: InputFieldProps) {
   return (
     <div className="flex flex-1 flex-col justify-center gap-2">
       <label htmlFor={label}>{label}</label>
       <input
         className="rounded-md p-2 outline outline-2 outline-stone-500 focus:outline-red-400"
         id={label}
+        name={name}
         value={value}
         onChange={onChange}
       />
@@ -43,15 +45,60 @@ function InputField({ label, value, onChange }: InputFieldProps) {
   );
 }
 
-const initialState = { title: '', artist: '', genre: 'Pop', lyrics: '' };
+type State = {
+  title: string;
+  artist?: string;
+  genre?: string;
+  lyrics?: string;
+};
+
+type Action =
+  | {
+      type: 'update';
+      payload: {
+        key: string;
+        value: string;
+      };
+    }
+  | {
+      type: 'reset';
+    };
+
+function songReducer(state: State, action: Action) {
+  switch (action.type) {
+    case 'update':
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value,
+      };
+    case 'reset':
+      return initialState;
+    default:
+      throw new Error(`Unknown action type in songReducer`);
+  }
+}
+
+const initialState = {
+  title: '',
+  artist: '',
+  genre: 'Pop',
+  lyrics: '',
+};
 
 export default React.forwardRef<
   HTMLFormElement,
-  React.PropsWithChildren<FormHTMLAttributes<HTMLFormElement>>
->(function CreateSongForm({}, ref) {
-  const [state, setState] = useState<Omit<Song, 'id'>>(initialState);
-  const [lyrics, setLyrics] = useState('');
-  const [error, setError] = useState(false);
+  React.PropsWithChildren<React.FormHTMLAttributes<HTMLFormElement>>
+>(function CreateSongForm(_, ref) {
+  const [state, dispatch] = React.useReducer(songReducer, initialState);
+  const [lyrics, setLyrics] = React.useState('');
+  const [error, setError] = React.useState(false);
+
+  const updateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: 'update',
+      payload: { key: e.target.name, value: e.target.value },
+    });
+  };
 
   const submitNewSong = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -62,7 +109,7 @@ export default React.forwardRef<
       artist: state.artist || 'Unknown',
       genre: state.genre || 'Unknown',
     })
-      .then(() => setState(initialState))
+      .then(() => dispatch({ type: 'reset' }))
       .catch(() => {
         setError(true);
       });
@@ -76,14 +123,16 @@ export default React.forwardRef<
       </span>
       <div className="flex flex-row flex-wrap gap-4">
         <InputField
+          name="title"
           label="Title*"
           value={state.title}
-          onChange={(e) => setState({ ...state, title: e.target.value })}
+          onChange={updateInput}
         />
         <InputField
+          name="artist"
           label="Artist"
           value={state.artist || ''}
-          onChange={(e) => setState({ ...state, artist: e.target.value })}
+          onChange={updateInput}
         />
         <div className="flex-0.5 flex flex-col gap-2">
           <label htmlFor="select-genre">Genre</label>
@@ -91,7 +140,12 @@ export default React.forwardRef<
             <select
               id="select-genre"
               className="py-1.75 w-full appearance-none rounded-lg border-2 border-stone-500 p-2 outline-2 focus:outline-red-400"
-              onChange={(e) => setState({ ...state, genre: e.target.value })}
+              onChange={(e) =>
+                dispatch({
+                  type: 'update',
+                  payload: { key: 'genre', value: e.target.value },
+                })
+              }
             >
               {Object.keys(genres).map((genre) => (
                 <option key={genre} value={genres[genre]}>
