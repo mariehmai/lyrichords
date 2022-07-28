@@ -274,14 +274,13 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                   cx={x}
                   cy={y}
                   r="8"
-                  fill={cn({
-                    'rgb(17 94 89)': finger === '1',
-                    'rgb(15 118 110)': finger === '2',
-                    'rgb(13 148 136)': finger === '3',
-                    'rgb(20 184 166)': finger === '4',
-                  })}
                   stroke="none"
-                  className="finger-position-shape bg-teal-800"
+                  className={cn('finger-position-shape', {
+                    'fill-yellow-900': finger === '1',
+                    'fill-yellow-800': finger === '2',
+                    'fill-yellow-700': finger === '3',
+                    'fill-yellow-600': finger === '4',
+                  })}
                   style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 ></circle>
                 <text
@@ -306,11 +305,10 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
             {hasStrikeout && isFirstOne && (
               <>
                 <path
-                  fill="rgb(17 94 89)"
                   d={`M${x - 5},${gridOrigin.offsetY}A5,5,0,0,1,${x + 5},${
                     gridOrigin.offsetY
                   }L${x + 5},${y}A5,5,0,0,1,${x - 5},${y}L${x - 5},36`}
-                  className="finger-position-shape"
+                  className="finger-position-shape fill-yellow-900"
                   style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 ></path>
                 <text

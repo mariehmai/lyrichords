@@ -42,9 +42,9 @@ const Chords = () => {
               <button
                 key={filter}
                 className={cn(
-                  'text-lg text-stone-700 underline outline-offset-1 outline-teal-600 hover:font-bold hover:text-teal-600 md:text-2xl',
+                  'text-lg text-stone-700 underline outline-offset-1 outline-yellow-600 hover:font-bold hover:text-yellow-600 md:text-2xl',
                   {
-                    'font-bold text-teal-600': filter === selectedFilter,
+                    'font-bold text-yellow-600': filter === selectedFilter,
                   }
                 )}
                 onClick={(e) => {
