@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cn from 'classnames';
 import type { Editor } from '@tiptap/react';
 import {
   BackspaceIcon,
@@ -82,21 +83,31 @@ function EditorMenu({ editor }: EditorMenuProps) {
         <label htmlFor="select-chord" className="text-sm font-extralight">
           Insert chord
         </label>
-        <div className="combo">
-          <select
-            id="select-chord"
-            className="w-full appearance-none rounded-md border-2 border-stone-500 px-1.5 py-0.5 text-left text-sm text-stone-600 focus:outline-red-400"
-            onChange={(e) => {
-              e.preventDefault();
-              insertChord(e.target.value as ChordName);
-            }}
-          >
-            {chordNames.map((chord) => (
-              <option key={chord} value={chord}>
-                {chord}
-              </option>
-            ))}
-          </select>
+        <div className="flex flex-wrap gap-1.5">
+          {chordNames.map((chord) => {
+            const [root, quality, tension, bass] = chord.split(',');
+
+            return (
+              <button
+                key={chord}
+                className={cn(
+                  'rounded-md border-2 border-stone-500 px-1.5 py-0.5 text-sm text-stone-600 outline-red-400',
+                  'hover:shadow-sm',
+                  'focus:border-red-400 focus:font-bold focus:text-red-600',
+                  'active:shadow-inner'
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  insertChord(chord);
+                }}
+              >
+                <span>{root}</span>
+                {quality && <sup>{quality}</sup>}
+                {tension && <sup>{tension}</sup>}
+                {bass && <span>{bass}</span>}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
