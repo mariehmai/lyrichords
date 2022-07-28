@@ -407,10 +407,12 @@ function Chord({
 }) {
   const chord = strings.split(' ');
   const fingers = fingering.split(' ');
+  const name = chordName.split(',').join('');
   // const fret = 1;
 
   return (
     <svg
+      data-testid={`chord-${name}`}
       version="1.1"
       className={cn('h-[80px] w-[100px] md:h-[162px] md:w-[200px]', {
         'rounded-lg bg-stone-50 shadow-xl': type === 'info',
