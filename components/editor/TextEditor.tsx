@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useEditor, EditorContent, type Editor } from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
+import type { Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import cn from 'classnames';
 import EditorMenu from './EditorMenu';

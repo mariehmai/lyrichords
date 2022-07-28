@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { type Editor } from '@tiptap/react';
+import type { Editor } from '@tiptap/react';
 import {
   BackspaceIcon,
   ClipboardCheckIcon,
@@ -8,7 +8,8 @@ import {
 } from '@heroicons/react/outline';
 import IconButton from '../IconButton';
 import AdaptiveSeparator from '@components/AdaptiveSeparator';
-import { type ChordName, chordNames } from './extensions/chord';
+import { chordNames } from './extensions/chord';
+import type { ChordName } from './extensions/chord';
 
 type CopyingStatus = 'saving' | 'done' | 'default';
 

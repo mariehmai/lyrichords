@@ -9,7 +9,8 @@ import {
   XIcon,
 } from '@heroicons/react/solid';
 import type { Editor } from '@tiptap/react';
-import { updateSong, deleteSong, useSong, type Song } from '@lib/songs/songs';
+import { updateSong, deleteSong, useSong } from '@lib/songs/songs';
+import type { Song } from '@lib/songs/songs';
 import Layout from '@components/Layout';
 import IconButton from '@components/IconButton';
 import IconLink from '@components/IconLink';
