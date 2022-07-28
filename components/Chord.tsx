@@ -1,33 +1,9 @@
 import * as React from 'react';
 import cn from 'classnames';
 
-type GuitarString =
-  | {
-      position: 0;
-      stringLabel: 'E2';
-    }
-  | {
-      position: 1;
-      stringLabel: 'B';
-    }
-  | {
-      position: 2;
-      stringLabel: 'G';
-    }
-  | {
-      position: 3;
-      stringLabel: 'D';
-    }
-  | {
-      position: 4;
-      stringLabel: 'A';
-    }
-  | {
-      position: 5;
-      stringLabel: 'E';
-    };
+type GuitarString = typeof gStrings[number];
 
-const gStrings: GuitarString[] = [
+const gStrings = [
   {
     position: 0,
     stringLabel: 'E2',
@@ -52,7 +28,7 @@ const gStrings: GuitarString[] = [
     position: 5,
     stringLabel: 'E',
   },
-];
+] as const;
 
 type AnnotationType = '0' | 'X';
 
