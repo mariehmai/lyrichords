@@ -2,26 +2,8 @@ import * as React from 'react';
 import cn from 'classnames';
 import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
 import { saveSong } from '@lib/songs/songs';
+import { genres } from '@lib/songs/genres';
 import TextEditor from './editor/TextEditor';
-
-type Genre =
-  | 'Pop'
-  | 'Reggaeton'
-  | 'Rock'
-  | 'Pop Rock'
-  | 'Latino'
-  | 'Vallenato'
-  | 'Merengue';
-
-const genres: Record<string, Genre> = {
-  Pop: 'Pop',
-  Reggaeton: 'Reggaeton',
-  Rock: 'Rock',
-  PopRock: 'Pop Rock',
-  Latino: 'Latino',
-  Vallenato: 'Vallenato',
-  Merengue: 'Merengue',
-};
 
 type InputFieldProps = {
   name: string;
@@ -81,7 +63,7 @@ function songReducer(state: State, action: Action) {
 const initialState = {
   title: '',
   artist: '',
-  genre: 'Pop',
+  genre: '',
   lyrics: '',
 };
 
@@ -147,9 +129,12 @@ export default React.forwardRef<
                 })
               }
             >
-              {Object.keys(genres).map((genre) => (
-                <option key={genre} value={genres[genre]}>
-                  {genres[genre]}
+              <option key="default" value="">
+                --genre--
+              </option>
+              {genres.map(({ name }) => (
+                <option key={name} value={name}>
+                  {name}
                 </option>
               ))}
             </select>
