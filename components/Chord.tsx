@@ -346,6 +346,9 @@ function ChordNamePart({ chord }: { chord: string }) {
   );
 }
 
+const chordBoxWidth = gridOrigin.lengthString + gridOrigin.offsetX;
+const chordBoxHeight = gridOrigin.lengthFret + gridOrigin.offsetY;
+
 function Chord({
   chordName = 'C,,,',
   strings = 'X 3 2 0 1 0',
@@ -361,13 +364,15 @@ function Chord({
     <svg
       data-testid={`chord-${name}`}
       version="1.1"
-      className={cn('h-[80px] w-[100px] md:h-[162px] md:w-[200px]', {
+      className={cn(`max-w-[108px] md:max-w-[200px]`, {
         'rounded-lg bg-stone-50 shadow-xl': type === 'info',
       })}
+      width="100%"
+      height="100%"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      viewBox="0 0 190 162"
-      style={{ overflow: 'hidden', position: 'relative' }}
+      viewBox={`0 0 ${chordBoxWidth} ${chordBoxHeight}`}
+      style={{ overflow: 'hidden' }}
     >
       <desc style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>
         {chordName}
