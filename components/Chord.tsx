@@ -1,34 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
-
-type GuitarString = typeof gStrings[number];
-
-const gStrings = [
-  {
-    position: 0,
-    stringLabel: 'E2',
-  },
-  {
-    position: 1,
-    stringLabel: 'B',
-  },
-  {
-    position: 2,
-    stringLabel: 'G',
-  },
-  {
-    position: 3,
-    stringLabel: 'D',
-  },
-  {
-    position: 4,
-    stringLabel: 'A',
-  },
-  {
-    position: 5,
-    stringLabel: 'E',
-  },
-] as const;
+import type { GuitarString } from '@lib/chords/strings';
+import { guitarStrings as gStrings } from '@lib/chords/strings';
 
 type AnnotationType = '0' | 'X';
 
