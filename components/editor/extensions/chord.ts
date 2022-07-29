@@ -202,7 +202,7 @@ export const Chord = Mark.create<ChordOptions>({
 
   addKeyboardShortcuts() {
     return {
-      'Mod-Shift-c': () => this.editor.commands.toggleChord(),
+      'Mod-Shift-e': () => this.editor.commands.toggleChord(),
     };
   },
 
