@@ -3,6 +3,7 @@ import {
   useAuthState,
   useSignInWithEmailAndPassword,
 } from 'react-firebase-hooks/auth';
+import { signInAnonymously } from 'firebase/auth';
 import { auth } from '@lib/firebase/config';
 
 export const useSignIn = () => {
@@ -12,11 +13,7 @@ export const useSignIn = () => {
   useEffect(() => {
     if (!!user?.uid) return;
 
-    const login = async () =>
-      signInWithEmailAndPassword(
-        process.env.NEXT_PUBLIC_FIREBASE_USER_EMAIL!,
-        process.env.NEXT_PUBLIC_FIREBASE_USER_PASSWORD!
-      );
+    const login = async () => signInAnonymously(auth);
 
     void login();
   }, [signInWithEmailAndPassword, user?.uid]);
