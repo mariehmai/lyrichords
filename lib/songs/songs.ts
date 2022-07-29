@@ -8,7 +8,7 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
-import { database, auth } from '@lib/firebase/config';
+import { database } from '@lib/firebase/config';
 import { toTitleCase } from '@lib/string';
 
 const dbInstance = collection(database, 'tracks');
@@ -26,7 +26,7 @@ export type UpdateSong = Partial<Omit<Song, 'id'>>;
 
 export const saveSong = async ({ title, artist, genre, lyrics }: CreateSong) =>
   addDoc(dbInstance, {
-    userId: auth.currentUser?.uid,
+    userId: 'anonymous',
     title: toTitleCase(title),
     artist,
     genre,

@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useSignIn } from '@lib/auth/auth';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -13,8 +12,6 @@ type AppPropsWithLayout = AppProps & {
 };
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
-  useSignIn();
-
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
