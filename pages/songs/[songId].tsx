@@ -149,32 +149,37 @@ function SongPage() {
   return (
     <div className="flex min-h-[90vh] flex-col gap-6 py-8">
       <IconLink href="/" label="Back to home" Icon={ArrowSmLeftIcon} />
-      {loading && <SongLyricsPlaceholder />}
-      {!song.lyrics && (
-        <SongHeader
-          goBack={router.back}
-          editable={editable}
-          song={song}
-          submitEditedSong={submitEditedSong}
-          toggleEditable={toggleEditable}
-        />
-      )}
-      {!!song.lyrics && (
-        <TextEditor
-          editable={editable}
-          content={song.lyrics}
-          onUpdate={(content) => setLyrics(content)}
-          Header={({ editor }) => (
+      {loading ? (
+        <SongLyricsPlaceholder />
+      ) : (
+        <>
+          {!song.lyrics && (
             <SongHeader
               goBack={router.back}
-              editor={editor}
               editable={editable}
               song={song}
               submitEditedSong={submitEditedSong}
               toggleEditable={toggleEditable}
             />
           )}
-        />
+          {!!song.lyrics && (
+            <TextEditor
+              editable={editable}
+              content={song.lyrics}
+              onUpdate={(content) => setLyrics(content)}
+              Header={({ editor }) => (
+                <SongHeader
+                  goBack={router.back}
+                  editor={editor}
+                  editable={editable}
+                  song={song}
+                  submitEditedSong={submitEditedSong}
+                  toggleEditable={toggleEditable}
+                />
+              )}
+            />
+          )}
+        </>
       )}
     </div>
   );
