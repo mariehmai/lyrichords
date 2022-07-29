@@ -9,8 +9,8 @@ import {
 } from '@heroicons/react/outline';
 import IconButton from '../IconButton';
 import AdaptiveSeparator from '@components/AdaptiveSeparator';
-import { chordNames } from './extensions/chord';
-import type { ChordName } from './extensions/chord';
+import { chordNames } from '@lib/chords/chords';
+import type { ChordName } from '@lib/chords/chords';
 
 type CopyingStatus = 'saving' | 'done' | 'default';
 
