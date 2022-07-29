@@ -64,13 +64,21 @@ export const Chord = Mark.create<ChordOptions>({
   },
 
   parseHTML() {
-    return [{ tag: 'span' }];
+    return [
+      {
+        tag: `span[data-type="${this.name}"]`,
+      },
+    ];
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
       'span',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+      mergeAttributes(
+        { 'data-type': this.name },
+        this.options.HTMLAttributes,
+        HTMLAttributes
+      ),
       0,
     ];
   },
