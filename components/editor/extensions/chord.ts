@@ -1,36 +1,18 @@
 /* eslint-disable arrow-body-style */
-import {
-  Mark,
-  markInputRule,
-  markPasteRule,
-  mergeAttributes,
-} from '@tiptap/react';
+import { mergeAttributes, Node } from '@tiptap/react';
 import type { ChordName } from '@lib/chords/chords';
+import { chordNames } from '@lib/chords/chords';
 
 export interface ChordOptions {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   HTMLAttributes: Record<string, any>;
+  chords: readonly ChordName[];
 }
 
 declare module '@tiptap/react' {
   interface Commands<ReturnType> {
     chord: {
-      /**
-       * Set a chord mark
-       */
-      setChord: () => ReturnType;
-      /**
-       * Toggle inline chord
-       */
-      toggleChord: () => ReturnType;
-      /**
-       * Unset a chord mark
-       */
-      unsetChord: () => ReturnType;
-      /**
-       * Insert a new chord mark
-       */
-      insertChord: (attributes?: { chord: ChordName }) => ReturnType;
+      insertChord: (attributes: { chord: ChordName }) => ReturnType;
     };
   }
 }
@@ -38,14 +20,25 @@ declare module '@tiptap/react' {
 export const inputRegex = /(?:^|\s)((?:\[)((?:[^\]]+))(?:\]))$/;
 export const pasteRegex = /(?:^|\s)((?:\[)((?:[^\]]+))(?:\]))/g;
 
-export const Chord = Mark.create<ChordOptions>({
+export const Chord = Node.create<ChordOptions>({
   name: 'chord',
 
   addOptions() {
     return {
       HTMLAttributes: {},
+      chords: chordNames,
     };
   },
+
+  keepOnSplit: false,
+
+  group: 'inline',
+
+  inline: true,
+
+  selectable: true,
+
+  atom: true,
 
   addAttributes() {
     return {
@@ -71,7 +64,7 @@ export const Chord = Mark.create<ChordOptions>({
     ];
   },
 
-  renderHTML({ HTMLAttributes }) {
+  renderHTML({ node, HTMLAttributes }) {
     return [
       'span',
       mergeAttributes(
@@ -79,82 +72,33 @@ export const Chord = Mark.create<ChordOptions>({
         this.options.HTMLAttributes,
         HTMLAttributes
       ),
-      0,
+      node.attrs.chord.replaceAll(',', ''),
     ];
   },
-
-  keepOnSplit: false,
 
   addCommands() {
     return {
-      setChord:
-        () =>
-        ({ commands }) => {
-          return commands.setMark(this.name);
-        },
-      toggleChord:
-        () =>
-        ({ commands, state }) => {
-          if (state.selection.empty) {
+      insertChord:
+        (attributes) =>
+        ({ chain }) => {
+          if (!this.options.chords.includes(attributes.chord)) {
             return false;
           }
 
-          return commands.toggleMark(this.name);
-        },
-      unsetChord:
-        () =>
-        ({ commands }) => {
-          return commands.unsetMark(this.name);
-        },
-      insertChord:
-        (attributes) =>
-        ({ commands, chain }) => {
-          return commands.command(() => {
-            return chain()
-              .focus()
-              .insertContent([
-                {
-                  type: 'text',
-                  text: attributes?.chord.replaceAll(',', ''),
-                  marks: [
-                    {
-                      type: this.name,
-                      attrs: { chord: attributes?.chord },
-                    },
-                  ],
-                },
-                {
-                  type: 'text',
-                  text: ' ',
-                },
-              ])
-              .run();
-          });
+          return chain()
+            .focus()
+            .insertContent([
+              {
+                type: this.name,
+                attrs: { chord: attributes.chord },
+              },
+              {
+                type: 'text',
+                text: ' ',
+              },
+            ])
+            .run();
         },
     };
-  },
-
-  addKeyboardShortcuts() {
-    return {
-      'Mod-Shift-e': () => this.editor.commands.toggleChord(),
-    };
-  },
-
-  addInputRules() {
-    return [
-      markInputRule({
-        find: inputRegex,
-        type: this.type,
-      }),
-    ];
-  },
-
-  addPasteRules() {
-    return [
-      markPasteRule({
-        find: pasteRegex,
-        type: this.type,
-      }),
-    ];
   },
 });
