@@ -53,7 +53,7 @@ function TextEditor({
         {editable && <EditorMenu editor={editor} />}
         <EditorContent
           editor={editor}
-          className={cn('rounded-b-lg focus:ring-0', {
+          className={cn('rounded-b-lg font-mono focus:ring-0', {
             'border-2 border-stone-500': editable,
           })}
         />
