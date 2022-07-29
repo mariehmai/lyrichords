@@ -160,7 +160,11 @@ export const Chord = Mark.create<ChordOptions>({
         },
       toggleChord:
         () =>
-        ({ commands }) => {
+        ({ commands, state }) => {
+          if (state.selection.empty) {
+            return false;
+          }
+
           return commands.toggleMark(this.name);
         },
       unsetChord:
