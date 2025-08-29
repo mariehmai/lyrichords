@@ -32,7 +32,9 @@ function Fret({
     <path
       fill="none"
       stroke="currentColor"
-      className="text-stone-500 dark:text-stone-400"
+      strokeWidth="2"
+      strokeLinecap="round"
+      className="text-stone-600 dark:text-stone-300"
       d={`M${x},${y}L${lengthString},${lengthFret}`}
       style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
     />
@@ -137,6 +139,7 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
           <path
             fill="none"
             stroke="currentColor"
+            strokeWidth="2"
             className="text-stone-600 dark:text-stone-300 string-annotation"
             d={`M1,${guitarStrings[position].y - 5}L11,${
               guitarStrings[position].y + 5
@@ -146,6 +149,7 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
           <path
             fill="none"
             stroke="currentColor"
+            strokeWidth="2"
             className="text-stone-600 dark:text-stone-300 string-annotation"
             d={`M11,${guitarStrings[position].y - 5}L1,${
               guitarStrings[position].y + 5
@@ -161,7 +165,8 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
           r="5"
           fill="none"
           stroke="currentColor"
-          className="text-stone-600 dark:text-stone-300 string-annotation"
+          strokeWidth="2"
+          className="text-emerald-600 dark:text-emerald-400"
           style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
         />
       )}
@@ -223,12 +228,17 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                   cx={x}
                   cy={y}
                   r="8"
-                  stroke="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   className={cn('finger-position-shape', {
-                    'fill-amber-600 dark:fill-amber-500': finger === '1',
-                    'fill-amber-700 dark:fill-amber-600': finger === '2',
-                    'fill-amber-800 dark:fill-amber-700': finger === '3',
-                    'fill-amber-900 dark:fill-amber-800': finger === '4',
+                    'fill-blue-500 stroke-blue-700 dark:fill-blue-400 dark:stroke-blue-600':
+                      finger === '1',
+                    'fill-green-500 stroke-green-700 dark:fill-green-400 dark:stroke-green-600':
+                      finger === '2',
+                    'fill-purple-500 stroke-purple-700 dark:fill-purple-400 dark:stroke-purple-600':
+                      finger === '3',
+                    'fill-red-500 stroke-red-700 dark:fill-red-400 dark:stroke-red-600':
+                      finger === '4',
                   })}
                   style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 />
