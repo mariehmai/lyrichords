@@ -1,19 +1,22 @@
+import * as React from 'react';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
-type LayoutProps = {
+interface LayoutProps {
   withFooter?: boolean;
-};
+}
 
 function Layout({
   withFooter = true,
   children,
 }: React.PropsWithChildren<LayoutProps>) {
   return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="flex grow flex-col">
+    <div className="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 transition-colors duration-200">
+      <div className="flex flex-1 flex-col">
         <Navbar />
-        <div className="h-full px-4 pt-[60px] md:px-8">{children}</div>
+        <main className="flex-1 px-4 pt-16 md:px-8 max-w-7xl mx-auto w-full">
+          {children}
+        </main>
       </div>
       {withFooter && <Footer />}
     </div>

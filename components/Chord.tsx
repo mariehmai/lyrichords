@@ -31,10 +31,11 @@ function Fret({
   return (
     <path
       fill="none"
-      stroke="#444444"
+      stroke="currentColor"
+      className="text-stone-500 dark:text-stone-400"
       d={`M${x},${y}L${lengthString},${lengthFret}`}
       style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-    ></path>
+    />
   );
 }
 
@@ -52,11 +53,11 @@ function ChordString({
       textAnchor="middle"
       fontSize="12px"
       stroke="none"
-      fill="#444444"
+      fill="currentColor"
+      className="text-stone-600 dark:text-stone-300 fret-start-number"
       style={{
         WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
       }}
-      className="fret-start-number"
     >
       <tspan style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} dy="5.5">
         {stringLabel}
@@ -114,10 +115,11 @@ function Grid() {
         height={gridOrigin.lengthFret - gridOrigin.offsetY}
         rx="0"
         ry="0"
-        fill="#444444"
-        stroke="#444444"
+        fill="currentColor"
+        stroke="currentColor"
+        className="text-stone-600 dark:text-stone-300"
         style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-      ></rect>
+      />
     </>
   );
 }
@@ -134,22 +136,22 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
         <>
           <path
             fill="none"
-            stroke="#444444"
+            stroke="currentColor"
+            className="text-stone-600 dark:text-stone-300 string-annotation"
             d={`M1,${guitarStrings[position].y - 5}L11,${
               guitarStrings[position].y + 5
             }`}
-            className="string-annotation"
             style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-          ></path>
+          />
           <path
             fill="none"
-            stroke="#444444"
+            stroke="currentColor"
+            className="text-stone-600 dark:text-stone-300 string-annotation"
             d={`M11,${guitarStrings[position].y - 5}L1,${
               guitarStrings[position].y + 5
             } `}
-            className="string-annotation"
             style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-          ></path>
+          />
         </>
       )}
       {type === '0' && (
@@ -158,10 +160,10 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
           cy={guitarStrings[position].y}
           r="5"
           fill="none"
-          stroke="#444444"
-          className="string-annotation"
+          stroke="currentColor"
+          className="text-stone-600 dark:text-stone-300 string-annotation"
           style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-        ></circle>
+        />
       )}
     </>
   );
@@ -169,24 +171,22 @@ function StringAnnotation({ position = 0, type }: StringAnnotationProps) {
 
 export function FretStartNumber({ fret }: { fret: number }) {
   return (
-    <>
-      <text
-        x="33.5"
-        y="154"
-        textAnchor="middle"
-        fontSize="16px"
-        stroke="none"
-        fill="#444444"
-        style={{
-          WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-        }}
-        className="fret-start-number"
-      >
-        <tspan style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} dy="5.5">
-          {fret}
-        </tspan>
-      </text>
-    </>
+    <text
+      x="33.5"
+      y="154"
+      textAnchor="middle"
+      fontSize="16px"
+      stroke="none"
+      fill="currentColor"
+      className="text-stone-600 dark:text-stone-300 fret-start-number"
+      style={{
+        WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+      }}
+    >
+      <tspan style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} dy="5.5">
+        {fret}
+      </tspan>
+    </text>
   );
 }
 
@@ -225,13 +225,13 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                   r="8"
                   stroke="none"
                   className={cn('finger-position-shape', {
-                    'fill-yellow-900': finger === '1',
-                    'fill-yellow-800': finger === '2',
-                    'fill-yellow-700': finger === '3',
-                    'fill-yellow-600': finger === '4',
+                    'fill-amber-600 dark:fill-amber-500': finger === '1',
+                    'fill-amber-700 dark:fill-amber-600': finger === '2',
+                    'fill-amber-800 dark:fill-amber-700': finger === '3',
+                    'fill-amber-900 dark:fill-amber-800': finger === '4',
                   })}
                   style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-                ></circle>
+                />
                 <text
                   x={x}
                   y={y}
@@ -239,8 +239,8 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                   fontSize="10px"
                   stroke="none"
                   fill="#ffffff"
-                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                   className="finger-position-label"
+                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 >
                   <tspan
                     style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
@@ -257,9 +257,9 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                   d={`M${x - 5},${gridOrigin.offsetY}A5,5,0,0,1,${x + 5},${
                     gridOrigin.offsetY
                   }L${x + 5},${y}A5,5,0,0,1,${x - 5},${y}L${x - 5},36`}
-                  className="finger-position-shape fill-yellow-900"
+                  className="finger-position-shape fill-amber-600 dark:fill-amber-500"
                   style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-                ></path>
+                />
                 <text
                   x={x}
                   y={gridOrigin.offsetY}
@@ -268,8 +268,8 @@ function FingerPosition({ strings, fingers }: FingerPositionProps) {
                   fontSize="10px"
                   stroke="none"
                   fill="#ffffff"
-                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                   className="finger-position-label"
+                  style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 >
                   <tspan
                     style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
@@ -297,9 +297,9 @@ function ChordNamePart({ chord }: { chord: string }) {
         textAnchor="start"
         fontSize="20px"
         stroke="none"
-        fill="#444444"
+        fill="currentColor"
+        className="text-stone-700 dark:text-stone-200 chord-name-part"
         style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-        className="chord-name-part"
       >
         <tspan
           style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
@@ -314,9 +314,9 @@ function ChordNamePart({ chord }: { chord: string }) {
         textAnchor="start"
         fontSize="16px"
         stroke="none"
-        fill="#444444"
+        fill="currentColor"
+        className="text-stone-700 dark:text-stone-200 chord-name-part"
         style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-        className="chord-name-part"
       >
         <tspan
           style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
@@ -331,9 +331,9 @@ function ChordNamePart({ chord }: { chord: string }) {
         textAnchor="start"
         fontSize="15px"
         stroke="none"
-        fill="#444444"
+        fill="currentColor"
+        className="text-stone-700 dark:text-stone-200 chord-name-part"
         style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-        className="chord-name-part"
       >
         <tspan
           style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
@@ -358,14 +358,13 @@ function Chord({
   const chord = strings.split(' ');
   const fingers = fingering.split(' ');
   const name = chordName.split(',').join('');
-  // const fret = 1;
 
   return (
     <svg
       data-testid={`chord-${name}`}
       version="1.1"
       className={cn(`max-w-[108px] md:max-w-[200px]`, {
-        'rounded-lg bg-stone-50 shadow-xl': type === 'info',
+        'rounded-lg bg-stone-50 dark:bg-stone-800 shadow-xl': type === 'info',
       })}
       width="100%"
       height="100%"
@@ -377,7 +376,7 @@ function Chord({
       <desc style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>
         {chordName}
       </desc>
-      <defs style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}></defs>
+      <defs style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} />
       <Grid />
       {chord.map((str, idx) =>
         ['0', 'X'].includes(str) ? (
@@ -390,7 +389,6 @@ function Chord({
       )}
       <ChordNamePart chord={chordName} />
       <FingerPosition strings={chord} fingers={fingers} />
-      {/* <FretStartNumber fret={fret} /> */}
     </svg>
   );
 }

@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { ThemeProvider } from '@hooks/useTheme';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -20,7 +21,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         <title>Lyrichords</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <ThemeProvider>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
     </>
   );
 }

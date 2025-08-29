@@ -34,7 +34,7 @@ function TextEditor({
     editorProps: {
       attributes: {
         class:
-          'p-2 outline-none rounded-b-md bg-white min-h-[50vh] focus:ring-2 focus:ring-red-400',
+          'p-4 outline-none rounded-b-md bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-100 min-h-[50vh] focus:ring-2 focus:ring-red-400 dark:focus:ring-red-500',
       },
     },
   });
@@ -50,12 +50,12 @@ function TextEditor({
   return (
     <div className="flex flex-col gap-4">
       {!!Header && <Header editor={editor} />}
-      <div>
+      <div className="rounded-lg overflow-hidden">
         {editable && <EditorMenu editor={editor} />}
         <EditorContent
           editor={editor}
           className={cn('rounded-b-lg font-mono focus:ring-0', {
-            'border-2 border-stone-500': editable,
+            'border-2 border-stone-500 dark:border-stone-600': editable,
           })}
         />
       </div>
