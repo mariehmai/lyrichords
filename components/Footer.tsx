@@ -1,5 +1,6 @@
 import { MusicalNoteIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
 import { CodeBracketIcon, UserIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -26,13 +27,13 @@ function Footer() {
               Quick Actions
             </h3>
             <div className="flex flex-col gap-2">
-              <a
+              <Link
                 href="/songs/new"
                 className="text-sm text-stone-600 dark:text-stone-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200 flex items-center gap-2"
               >
                 <MusicalNoteIcon className="w-4 h-4" />
                 Add New Song
-              </a>
+              </Link>
               <button
                 onClick={() => {
                   const searchInput = document.querySelector(
