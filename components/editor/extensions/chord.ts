@@ -47,7 +47,7 @@ export const Chord = Node.create<ChordOptions>({
           return {
             'data-chord': attributes.chord,
             class:
-              'cursor-pointer shadow-md border rounded py-0.25 px-0.5 hover:underline bg-stone-100 text-sm text-stone-700',
+              'cursor-pointer shadow-md border-2 border-amber-500 rounded-lg py-0.5 px-2 hover:shadow-lg bg-amber-100 dark:bg-amber-900/30 text-sm text-amber-800 dark:text-amber-300 font-bold transition-all hover:bg-amber-200 dark:hover:bg-amber-800/40',
           };
         },
       },
