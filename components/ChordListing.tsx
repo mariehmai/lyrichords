@@ -3,8 +3,8 @@ import {
   EyeIcon,
   EyeSlashIcon,
   InformationCircleIcon,
-  LinkIcon,
 } from '@heroicons/react/24/solid';
+import { BookOpenIcon } from '@heroicons/react/24/outline';
 import IconButton from './IconButton';
 import IconLink from './IconLink';
 import Chord from './Chord';
@@ -37,7 +37,7 @@ function ChordListing() {
           title="Chords fetched from https://api.uberchord.com/"
           Icon={InformationCircleIcon}
         />
-        <IconLink href="/chords" title="See all chords" Icon={LinkIcon} />
+        <IconLink href="/chords" title="See all chords" Icon={BookOpenIcon} />
       </div>
       {showChords && (
         <div className="flex flex-wrap gap-2">

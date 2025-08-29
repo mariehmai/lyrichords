@@ -5,6 +5,7 @@ import {
   PlusIcon,
   MusicalNoteIcon,
   MagnifyingGlassIcon,
+  PlusCircleIcon,
 } from '@heroicons/react/24/solid';
 import { useSongs } from '@lib/songs/songs';
 import Divider from './Divider';
@@ -60,13 +61,19 @@ function SongListing() {
           )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <IconButton
             title={showSongs ? 'Hide songs list' : 'Show songs list'}
             onClick={onToggleSongsVisible}
             Icon={showSongs ? EyeSlashIcon : EyeIcon}
           />
-          <IconLink href="/songs/new" title="Add new song" Icon={PlusIcon} />
+          <IconLink
+            href="/songs/new"
+            title="Add new song"
+            label="Add song"
+            size="md"
+            Icon={PlusCircleIcon}
+          />
         </div>
       </div>
 
