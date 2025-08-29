@@ -1,10 +1,15 @@
 {
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["*.js"],
+  "ignorePatterns": [
+    "*.js"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "import"],
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
   "extends": [
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
@@ -12,9 +17,13 @@
   ],
   "rules": {
     // Require all external imports to be declared as a dependency
-    "import/no-extraneous-dependencies": ["error"],
+    "import/no-extraneous-dependencies": [
+      "error"
+    ],
     // Imports must not cause cyclical dependencies
-    "import/no-cycle": ["error"],
+    "import/no-cycle": [
+      "error"
+    ],
     // Imports must be ordered appropriately
     "import/order": [
       "error",
@@ -33,7 +42,10 @@
     // eslint comments, otherwise we assume they were unintended:
     "no-console": "error",
     // Favor omitting curly brackets when possible for arrow functions
-    "arrow-body-style": ["error", "as-needed"],
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
     // Disallow names ending with an underscore_
     "no-underscore-dangle": "off",
     // Require a space at the start of comments
@@ -41,7 +53,9 @@
       "error",
       "always",
       {
-        "markers": ["/"]
+        "markers": [
+          "/"
+        ]
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
