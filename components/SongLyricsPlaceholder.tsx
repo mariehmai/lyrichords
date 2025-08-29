@@ -1,4 +1,4 @@
-import { PencilIcon } from '@heroicons/react/solid';
+import { PencilIcon } from '@heroicons/react/24/solid';
 
 function SongLyricsPlaceholder() {
   return (

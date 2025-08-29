@@ -2,12 +2,12 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import {
-  ArrowSmLeftIcon,
+  ArrowLeftIcon,
   CheckIcon,
   PencilIcon,
   TrashIcon,
-  XIcon,
-} from '@heroicons/react/solid';
+  XMarkIcon,
+} from '@heroicons/react/24/solid';
 import type { Editor } from '@tiptap/react';
 import { updateSong, deleteSong, useSong } from '@lib/songs/songs';
 import type { Song } from '@lib/songs/songs';
@@ -77,7 +77,7 @@ function SongHeader({
               title="Cancel changes"
               size="md"
               onClick={cancelChanges}
-              Icon={XIcon}
+              Icon={XMarkIcon}
             />
             <IconButton
               title="Confirm changes"
@@ -148,7 +148,7 @@ function SongPage() {
 
   return (
     <div className="flex min-h-[90vh] flex-col gap-6 py-8">
-      <IconLink href="/" label="Back to home" Icon={ArrowSmLeftIcon} />
+      <IconLink href="/" label="Back to home" Icon={ArrowLeftIcon} />
       {loading ? (
         <SongLyricsPlaceholder />
       ) : (

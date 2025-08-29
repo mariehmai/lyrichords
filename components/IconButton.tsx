@@ -8,7 +8,7 @@ type IconButtonProps = {
   withBorder?: boolean;
   disabled?: boolean;
   onClick?: () => void;
-  Icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  Icon: React.ElementType;
 };
 
 function IconButton({

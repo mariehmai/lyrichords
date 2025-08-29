@@ -30,8 +30,6 @@ export const Chord = Node.create<ChordOptions>({
     };
   },
 
-  keepOnSplit: false,
-
   group: 'inline',
 
   inline: true,

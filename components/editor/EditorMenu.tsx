@@ -3,10 +3,10 @@ import cn from 'classnames';
 import type { Editor } from '@tiptap/react';
 import {
   BackspaceIcon,
-  ClipboardCheckIcon,
-  ClipboardCopyIcon,
+  ClipboardDocumentCheckIcon,
+  ClipboardDocumentIcon,
   ClipboardIcon,
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import IconButton from '../IconButton';
 import AdaptiveSeparator from '@components/AdaptiveSeparator';
 import { chordNames } from '@lib/chords/chords';
@@ -17,9 +17,9 @@ type CopyingStatus = 'saving' | 'done' | 'default';
 function getCopyingIcon(status: CopyingStatus) {
   switch (status) {
     case 'saving':
-      return ClipboardCopyIcon;
+      return ClipboardDocumentIcon;
     case 'done':
-      return ClipboardCheckIcon;
+      return ClipboardDocumentCheckIcon;
     default:
       return ClipboardIcon;
   }

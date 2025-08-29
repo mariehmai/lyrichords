@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
-  EyeOffIcon,
   EyeIcon,
+  EyeSlashIcon,
   InformationCircleIcon,
-  ExternalLinkIcon,
-} from '@heroicons/react/solid';
+  LinkIcon,
+} from '@heroicons/react/24/solid';
 import IconButton from './IconButton';
 import IconLink from './IconLink';
 import Chord from './Chord';
@@ -31,7 +31,7 @@ function ChordListing() {
         <IconButton
           title={showChords ? 'Hide chords list' : 'Show chords list'}
           onClick={toggleSongsVisible}
-          Icon={showChords ? EyeOffIcon : EyeIcon}
+          Icon={showChords ? EyeSlashIcon : EyeIcon}
         />
         <IconButton
           title="Chords fetched from https://api.uberchord.com/"
@@ -40,7 +40,7 @@ function ChordListing() {
         <IconLink
           href="/chords"
           title="See all chords"
-          Icon={ExternalLinkIcon}
+          Icon={LinkIcon}
         />
       </div>
       {showChords && (

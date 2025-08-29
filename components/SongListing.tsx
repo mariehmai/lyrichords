@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EyeOffIcon, EyeIcon, DocumentAddIcon } from '@heroicons/react/solid';
+import { EyeIcon, EyeSlashIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { useSongs } from '@lib/songs/songs';
 import Divider from './Divider';
 import IconButton from './IconButton';
@@ -20,12 +20,12 @@ function SongListing() {
         <IconButton
           title={showSongs ? 'Hide songs list' : 'Show songs list'}
           onClick={toggleSongsVisible}
-          Icon={showSongs ? EyeOffIcon : EyeIcon}
+          Icon={showSongs ? EyeSlashIcon : EyeIcon}
         />
         <IconLink
           href="/songs/new"
           title="Add new song"
-          Icon={DocumentAddIcon}
+          Icon={PlusIcon}
         />
       </div>
       {showSongs && (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { MusicNoteIcon, CheckIcon } from '@heroicons/react/solid';
+import { CheckIcon, MusicalNoteIcon } from '@heroicons/react/24/solid';
 import { saveSong } from '@lib/songs/songs';
 import { genres } from '@lib/songs/genres';
 import TextEditor from './editor/TextEditor';
@@ -101,7 +101,7 @@ export default React.forwardRef<
     <form ref={ref} className="flex flex-col gap-2">
       <span className="mb-2 flex items-center gap-2">
         <h1>Add new song</h1>
-        <MusicNoteIcon className="h-7 w-7 text-stone-600" />
+        <MusicalNoteIcon className="h-7 w-7 text-stone-600" />
       </span>
       <div className="flex flex-row flex-wrap gap-4">
         <InputField
