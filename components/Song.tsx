@@ -5,11 +5,7 @@ function ClickableSong({
   children,
   href,
 }: React.PropsWithChildren<{ href: string }>) {
-  return (
-    <Link href={`/songs/${href}`}>
-      {children}
-    </Link>
-  );
+  return <Link href={`/songs/${href}`}>{children}</Link>;
 }
 
 type SongProps = {

@@ -43,7 +43,7 @@ export const useSongs = () => {
       ({
         ...doc.data(),
         id: doc.id,
-      } as Song)
+      }) as Song
   );
 
   return { songs, loading, error };

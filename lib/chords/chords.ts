@@ -71,4 +71,4 @@ export const chordNames = [
   'G,m,6,',
 ] as const;
 
-export type ChordName = typeof chordNames[number];
+export type ChordName = (typeof chordNames)[number];

@@ -37,11 +37,7 @@ function ChordListing() {
           title="Chords fetched from https://api.uberchord.com/"
           Icon={InformationCircleIcon}
         />
-        <IconLink
-          href="/chords"
-          title="See all chords"
-          Icon={LinkIcon}
-        />
+        <IconLink href="/chords" title="See all chords" Icon={LinkIcon} />
       </div>
       {showChords && (
         <div className="flex flex-wrap gap-2">

@@ -1,4 +1,4 @@
-export type GuitarString = typeof guitarStrings[number];
+export type GuitarString = (typeof guitarStrings)[number];
 
 export const guitarStrings = [
   {

@@ -22,11 +22,7 @@ function SongListing() {
           onClick={toggleSongsVisible}
           Icon={showSongs ? EyeSlashIcon : EyeIcon}
         />
-        <IconLink
-          href="/songs/new"
-          title="Add new song"
-          Icon={PlusIcon}
-        />
+        <IconLink href="/songs/new" title="Add new song" Icon={PlusIcon} />
       </div>
       {showSongs && (
         <div>
