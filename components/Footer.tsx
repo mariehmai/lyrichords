@@ -74,7 +74,7 @@ function Footer() {
 
         <div className="border-t border-stone-200 dark:border-stone-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-stone-500 dark:text-stone-500 flex items-center gap-1">
-            © {currentYear} Marie-Hélène Mai • Made for music lovers
+            © 2022-{currentYear} Marie-Hélène Mai • Made for music lovers
           </p>
 
           <div className="flex items-center gap-4">
